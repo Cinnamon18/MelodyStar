@@ -1,4 +1,4 @@
-# Stars
+# Rhythm
 VGDev Game No. 3! Let's make it happen!
 
 # License
