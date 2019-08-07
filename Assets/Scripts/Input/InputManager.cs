@@ -1,5 +1,4 @@
 ﻿//Does unity have it's own input system? Yeah! But we've gotta mix in the external MIDI package.
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MidiJack;
