@@ -1,5 +1,6 @@
 ﻿using System;
 using CustomInput;
+using MidiJack;
 using UnityEngine;
 
 namespace Gameplay {
@@ -7,7 +8,6 @@ namespace Gameplay {
 		public InputManager inputManager;
 
 		void Start() {
-			InputSettings.setToDefault();
 		}
 
 		void Update() {

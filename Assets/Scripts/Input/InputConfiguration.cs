@@ -13,6 +13,8 @@ namespace CustomInput {
 		void Start() {
 			//Just for testing
 			// InputSettings.setToDefault();
+			InputSettings.setToDefaultMidi();
+			Debug.Log(InputSettings.keys.Length);
 
 			if (InputSettings.inputMode == InputMode.Keyboard) {
 				setInputModeKeyboard();
@@ -55,8 +57,9 @@ namespace CustomInput {
 			middleCButt.GetComponent<Button>().interactable = true;
 		}
 
-		private IEnumerator awaitKeyPress(System.Action<int> callback) {
-			while (inputManager.keysIndiciesPressed.Count == 0) {
+		private IEnumerator awaitKeyPress(System.Action<int> callback, List<int> keysToIgnore = null) {
+			while (inputManager.keysIndiciesPressed.Count == 0 ||
+				(keysToIgnore?.Contains(inputManager.keysIndiciesPressed[0]) ?? false)) {
 				yield return null;
 			}
 			callback(inputManager.keysIndiciesPressed[0]);
@@ -64,16 +67,17 @@ namespace CustomInput {
 
 
 
+		//Callback pyramid this feels like i'm writing pre es6 js sigh
 		public void startMidiConfig() {
 			midiRangeButt.SetActive(false);
 			midiRangeLabel.GetComponentInChildren<Text>().text = "Press the lowest key...";
 			StartCoroutine(awaitKeyPress((int minKey) => {
-				Debug.Log(minKey);
 				midiRangeLabel.GetComponentInChildren<Text>().text = "Press the highest key...";
 				StartCoroutine(awaitKeyPress((int maxKey) => {
 					InputSettings.keys = Enumerable.Range(minKey, maxKey - minKey).ToArray();
 					midiRangeLabel.GetComponentInChildren<Text>().text = "Set Midi Range";
-				}));
+					midiRangeButt.SetActive(true);
+				}, new List<int> { minKey }));
 			}));
 		}
 
