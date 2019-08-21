@@ -12,7 +12,7 @@ namespace CustomInput {
 
 		void Start() {
 			//Just for testing
-			InputSettings.setToDefault();
+			// InputSettings.setToDefault();
 
 			if (InputSettings.inputMode == InputMode.Keyboard) {
 				setInputModeKeyboard();
@@ -67,7 +67,6 @@ namespace CustomInput {
 		public void startMidiConfig() {
 			midiRangeButt.SetActive(false);
 			midiRangeLabel.GetComponentInChildren<Text>().text = "Press the lowest key...";
-			Debug.Log("uwu");
 			StartCoroutine(awaitKeyPress((int minKey) => {
 				Debug.Log(minKey);
 				midiRangeLabel.GetComponentInChildren<Text>().text = "Press the highest key...";

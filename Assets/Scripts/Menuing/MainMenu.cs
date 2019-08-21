@@ -1,8 +1,14 @@
 using System.Linq;
+using CustomInput;
 using UnityEngine;
 
 namespace Menuing {
 	public class MainMenu : MonoBehaviour {
+
+		void Start() {
+			InputSettings.setToDefault();
+		}
+
 		public void story() {
 			StartCoroutine(SceneTransition.LoadScene("Story"));
 		}

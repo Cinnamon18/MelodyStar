@@ -12,7 +12,7 @@ public class SceneTransition : MonoBehaviour {
 	private static AnimationCurve currentTransCurve;
 	public AnimationCurve animCurve;
 
-	private static readonly float TRANSITION_TIME = 2f;
+	private static readonly float TRANSITION_TIME = 0.3f;
 
 	void Awake() {
 		sceneTransitionCanvas = Resources.Load<GameObject>("SceneTransitionCanvas");
@@ -29,11 +29,13 @@ public class SceneTransition : MonoBehaviour {
 		}
 
 		GameObject sceneTransCan = Object.Instantiate(sceneTransitionCanvas);
-		RectTransform mask = sceneTransCan.transform.GetChild(0).gameObject.GetComponent<RectTransform>();
+		Image image = sceneTransCan.GetComponentInChildren<Image>();
 
 		yield return SceneTransition.Lerp(SceneTransition.TRANSITION_TIME, progress => {
-			float scaler = 1 - currentTransCurve.Evaluate(progress);
-			mask.sizeDelta = new Vector2(scaler * 1600, scaler * 900);
+			float scaler = currentTransCurve.Evaluate(progress);
+			Color opacityChangedColor = image.color;
+			opacityChangedColor.a = scaler;
+			image.color = opacityChangedColor;
 		});
 
 		yield return new WaitForSeconds(0.1f);
@@ -41,15 +43,17 @@ public class SceneTransition : MonoBehaviour {
 	}
 
 	private static IEnumerator FadeIn() {
-			GameObject sceneTransCan = Object.Instantiate(sceneTransitionCanvas);
-			RectTransform mask = sceneTransCan.transform.GetChild(0).gameObject.GetComponent<RectTransform>();
+		GameObject sceneTransCan = Object.Instantiate(sceneTransitionCanvas);
+		Image image = sceneTransCan.GetComponentInChildren<Image>();
 
-			yield return SceneTransition.Lerp(SceneTransition.TRANSITION_TIME, progress => {
-				float scaler = currentTransCurve.Evaluate(progress);
-				mask.sizeDelta = new Vector2(scaler * 1600, scaler * 900);
-			});
+		yield return SceneTransition.Lerp(SceneTransition.TRANSITION_TIME, progress => {
+			float scaler = 1 - currentTransCurve.Evaluate(progress);
+			Color opacityChangedColor = image.color;
+			opacityChangedColor.a = scaler;
+			image.color = opacityChangedColor;
+		});
 
-			Object.Destroy(sceneTransCan);
+		Object.Destroy(sceneTransCan);
 	}
 
 	private static IEnumerator Lerp(float duration, Action<float> perStep) {
