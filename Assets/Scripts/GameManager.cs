@@ -11,8 +11,8 @@ namespace Gameplay {
 		}
 
 		void Update() {
-			if (inputManager.keysIndiciesPressedLastFrame.Count > 0) {
-				Debug.Log(inputManager.keysIndiciesPressedLastFrame[0]);
+			if (inputManager.keysIndiciesPressed.Count > 0) {
+				Debug.Log(inputManager.keysIndiciesPressed[0]);
 			}
 		}
 	}

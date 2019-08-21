@@ -1,15 +1,22 @@
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Menuing {
 	public class MainMenu : MonoBehaviour {
-		public void freePlay() {
-			SceneManager.LoadScene("SongSelect");
+		public void story() {
+			StartCoroutine(SceneTransition.LoadScene("Story"));
 		}
 
-		public void setupMidi() {
-			SceneManager.LoadScene("Configure");
+		public void freePlay() {
+			StartCoroutine(SceneTransition.LoadScene("SongSelect"));
+		}
+
+		public void configure() {
+			StartCoroutine(SceneTransition.LoadScene("Configure"));
+		}
+
+		public void quit() {
+			Application.Quit();
 		}
 
 	}
