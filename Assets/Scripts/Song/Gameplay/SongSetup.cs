@@ -22,6 +22,10 @@ namespace Song.Gameplay {
 				Vector2 horizontalOffset = new Vector2(i * laneWidth + (laneWidth * 0.5f), 0);
 				Instantiate(lanePrefab, startingPoint + horizontalOffset, lanePrefab.transform.rotation);
 			}
+
+
+
+			MidiParser.readMidi();
 		}
 	}
 }
