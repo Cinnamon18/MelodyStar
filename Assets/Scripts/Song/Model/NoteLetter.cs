@@ -1,5 +1,5 @@
 //For simplicity's sake there are just 12 of them, a half step per index
-namespace Song {
+namespace Song.Model {
 	public enum NoteLetter {
 		A = 0,
 		As,

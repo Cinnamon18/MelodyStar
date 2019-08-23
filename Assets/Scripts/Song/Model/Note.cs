@@ -1,4 +1,4 @@
-namespace Song {
+namespace Song.Model {
 	public class Note {
 		public const int noteLetterCount = 12;
 

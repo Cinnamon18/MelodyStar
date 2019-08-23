@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace CustomInput {
 	public static class InputSettings {
+		//Alas, array 'literals' are not truly literal and thus not compile time constants!
 		public static readonly int[] defaultKeys = { (int)(KeyCode.A), (int)(KeyCode.S), (int)(KeyCode.D), (int)(KeyCode.F), (int)(KeyCode.G), (int)(KeyCode.H), (int)(KeyCode.J), (int)(KeyCode.K), (int)(KeyCode.L), (int)(KeyCode.Semicolon), (int)(KeyCode.Quote) };
 		public static readonly int[] defaultMidiKeys = Enumerable.Range(0, 128).ToArray();
 		public static readonly InputMode defaultInputMode = InputMode.Keyboard;
