@@ -14,7 +14,7 @@ namespace Menuing {
 		}
 
 		public void freePlay() {
-			StartCoroutine(SceneTransition.LoadScene("SongSelect"));
+			StartCoroutine(SceneTransition.LoadScene("Song"));
 		}
 
 		public void configure() {

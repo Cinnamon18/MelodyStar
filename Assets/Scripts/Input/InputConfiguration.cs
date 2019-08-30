@@ -45,7 +45,7 @@ namespace CustomInput {
 			middleCLabel.GetComponentInChildren<Text>().text = "Press key...";
 			middleCButt.GetComponent<Button>().interactable = false;
 			StartCoroutine(awaitKeyPress((int key) => {
-				InputSettings.middleC = inputManager.keysIndiciesPressed[0];
+				InputSettings.middleC = key;
 				middleCLabel.GetComponentInChildren<Text>().text = "Middle C set to: " + InputSettings.middleC;
 				StartCoroutine(restoreMiddleC());
 			}));
