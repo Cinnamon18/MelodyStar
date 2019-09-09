@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Songs.Gameplay {
 	public class LaneNote : MonoBehaviour {
-		const float fallSpeed = 6; //Should be units per second, where the screen is 10 units tall
+		const float fallSpeed = 4; //Should be units per second, where the screen is 10 units tall
 		const float rotateSpeed = 50;
 
 		void Start() {

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MidiJack;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,6 @@ namespace CustomInput {
 			//Just for testing
 			// InputSettings.setToDefault();
 			InputSettings.setToDefaultMidi();
-			Debug.Log(InputSettings.keys.Length);
 
 			if (InputSettings.inputMode == InputMode.Keyboard) {
 				setInputModeKeyboard();
@@ -40,23 +40,6 @@ namespace CustomInput {
 			midiRangeButt.SetActive(true);
 		}
 
-
-		public void setMiddleC() {
-			middleCLabel.GetComponentInChildren<Text>().text = "Press key...";
-			middleCButt.GetComponent<Button>().interactable = false;
-			StartCoroutine(awaitKeyPress((int key) => {
-				InputSettings.middleC = key;
-				middleCLabel.GetComponentInChildren<Text>().text = "Middle C set to: " + InputSettings.middleC;
-				StartCoroutine(restoreMiddleC());
-			}));
-		}
-
-		public IEnumerator restoreMiddleC() {
-			yield return new WaitForSeconds(2f);
-			middleCLabel.GetComponentInChildren<Text>().text = "Set Middle C";
-			middleCButt.GetComponent<Button>().interactable = true;
-		}
-
 		private IEnumerator awaitKeyPress(System.Action<int> callback, List<int> keysToIgnore = null) {
 			while (inputManager.keysIndiciesPressed.Count == 0 ||
 				(keysToIgnore?.Contains(inputManager.keysIndiciesPressed[0]) ?? false)) {
@@ -65,19 +48,35 @@ namespace CustomInput {
 			callback(inputManager.keysIndiciesPressed[0]);
 		}
 
+		private IEnumerator awaitKeyPressRaw(System.Action<int> callback, float delay = 0) {
+			yield return new WaitForSeconds(delay);
+			int keyPressed = -1;
+			while (keyPressed == -1) {
+				for (int i = 0; i < 128; i++) {
+					if (MidiMaster.GetKey(i) > 0.1f) {
+						keyPressed = i;
+					}
+				}
+				if (keyPressed == -1) {
+					yield return null;
+				}
+			}
+			callback(keyPressed);
+		}
+
 
 
 		//Callback pyramid this feels like i'm writing pre es6 js sigh
 		public void startMidiConfig() {
 			midiRangeButt.SetActive(false);
 			midiRangeLabel.GetComponentInChildren<Text>().text = "Press the lowest key...";
-			StartCoroutine(awaitKeyPress((int minKey) => {
+			StartCoroutine(awaitKeyPressRaw((int minKey) => {
 				midiRangeLabel.GetComponentInChildren<Text>().text = "Press the highest key...";
-				StartCoroutine(awaitKeyPress((int maxKey) => {
-					InputSettings.keys = Enumerable.Range(minKey, maxKey - minKey).ToArray();
+				StartCoroutine(awaitKeyPressRaw((int maxKey) => {
+					InputSettings.keys = Enumerable.Range(minKey, maxKey - minKey + 1).ToArray();
 					midiRangeLabel.GetComponentInChildren<Text>().text = "Set Midi Range";
 					midiRangeButt.SetActive(true);
-				}, new List<int> { minKey }));
+				}, 0.5f));
 			}));
 		}
 

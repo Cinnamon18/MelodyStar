@@ -12,19 +12,34 @@ namespace CustomInput {
 		[HideInInspector]
 		public List<int> keysIndiciesPressed = new List<int>();
 
+		//MidiMaster doesn't seem to let us wait for key up. This list waits for key up before registering a key again.
+		[HideInInspector]
+		public List<int> keysIndiciesPressedButton = new List<int>();
+		private List<int> keysIndiciesPressedLastFrame = new List<int>();
+
 		void Update() {
 			keysIndiciesPressed.Clear();
+			keysIndiciesPressedButton.Clear();
 			for (int i = 0; i < InputSettings.keys.Length; i++) {
 				if (InputSettings.inputMode == InputMode.Keyboard) {
 					if (Input.GetKey((KeyCode)(InputSettings.keys[i]))) {
 						keysIndiciesPressed.Add(i);
+
+						if (!keysIndiciesPressedLastFrame.Contains(i)) {
+							keysIndiciesPressedButton.Add(i);
+						}
 					}
 				} else if (InputSettings.inputMode == InputMode.MIDI) {
 					if (MidiMaster.GetKey(InputSettings.keys[i]) > noteActivationThreshold) {
 						keysIndiciesPressed.Add(i);
+
+						if (!keysIndiciesPressedLastFrame.Contains(i)) {
+							keysIndiciesPressedButton.Add(i);
+						}
 					}
 				}
 			}
+			keysIndiciesPressedLastFrame = new List<int>(keysIndiciesPressed);
 		}
 	}
 }
