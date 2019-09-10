@@ -1,4 +1,4 @@
-# Melody Star
+# Melody Star!
 Melody Star! is a rhythm game played with a real piano. Instead of pressing buttons on a controller, players use electronic instruments to play the actual notes of a song! Join a cast of lovable characters as they strive to become the best musicians in the land!
 
 # License
