@@ -9,7 +9,7 @@ namespace Songs.Gameplay {
 
 		private Song song;
 		private AudioClip songBackground;
-		public AudioSource audio;
+		public AudioSource backgroundMusic;
 
 		private List<Lane> lanes;
 		private float songStartTime;
@@ -18,8 +18,8 @@ namespace Songs.Gameplay {
 		void Start() {
 			song = MidiParser.readMidi("Assets/Resources/Songs/HotCrossBunsLow.mid");
 			songBackground = Resources.Load<AudioClip>("Songs/Megalovania");
-			audio.clip = songBackground;
-			audio.Play();
+			backgroundMusic.clip = songBackground;
+			backgroundMusic.Play();
 
 			SongSetup songSetup = gameObject.GetComponent<SongSetup>();
 			lanes = songSetup.setupLanes();
