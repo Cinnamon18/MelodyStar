@@ -15,16 +15,20 @@ namespace CustomInput {
 		public static InputMode inputMode;
 		public static int middleC; //index in the keys array corresponding to middle C.
 
+		public static bool initalized = false;
+
 		public static void setToDefault() {
 			InputSettings.keys = defaultKeys;
 			InputSettings.inputMode = defaultInputMode;
 			InputSettings.middleC = defaultMiddleC;
+			initalized = true;
 		}
 
 		public static void setToDefaultMidi() {
 			InputSettings.keys = defaultMidiKeys;
 			InputSettings.inputMode = InputMode.MIDI;
 			InputSettings.middleC = defaultMiddleCMidi;
+			initalized = true;
 		}
 	}
 }

@@ -5,9 +5,12 @@ using UnityEngine;
 namespace Songs.Model {
 	public class Song {
 		public List<SongNote> notes;
+		public AudioClip backgroundTrack, instrumentSample;
 
-		public Song(List<SongNote> notes) {
+		public Song(List<SongNote> notes, AudioClip backgroundTrack, AudioClip instrumentSample) {
 			this.notes = notes;
+			this.backgroundTrack = backgroundTrack;
+			this.instrumentSample = instrumentSample;
 		}
 
 		//TODO: Refactor this to be less than O(n)...
