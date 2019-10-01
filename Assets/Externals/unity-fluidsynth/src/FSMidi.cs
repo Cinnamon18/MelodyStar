@@ -5,6 +5,8 @@ namespace FluidSynth {
      * Class for MIDI note handling.
      */
     public class MIDINote {
+        public const int TYPE_PRESS = 144;
+        
         public int
             chn = -1, // Channel
             key = -1, // Key

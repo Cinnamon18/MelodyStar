@@ -61,13 +61,15 @@ namespace FluidSynth {
                             "{0}: Failed to create synth.", pkg);
             }
         
-            {   // Create audio driver
-                audioDriver = Wrapper.new_fluid_audio_driver(settings, synth);
-                Util.Assert(audioDriver != IntPtr.Zero,
-                            "{0}: Failed to create driver.", pkg);
-
+            {   // Setup audio output
                 // Link synth to Unity AudioSource if provided
-                if (unityAudioProvider != null) { 
+                if (unityAudioProvider == null) {
+                    // Create audio driver
+                    audioDriver
+                        = Wrapper.new_fluid_audio_driver(settings, synth);
+                    Util.Assert(audioDriver != IntPtr.Zero,
+                                "{0}: Failed to create driver.", pkg);
+                } else { 
                     unityAudioProvider.clip = AudioClip.Create
                         ("FluidSynth", 2, 2, audioSampleRate,
                          true, (float[] buf) => {
@@ -218,7 +220,7 @@ namespace FluidSynth {
             // Read MIDI note data
             var midi = Middleware.CreateDeviceMIDINote(midiEvent);
                 
-            if(midi.typ == 144) { // If press
+            if(midi.typ == MIDINote.TYPE_PRESS) { // If press
                 midi = callbackEnv.onPress(midi, callbackEnv.onPressEnv);
                 if (midi != null) {
                     ((MiddlewareAPI) callbackEnv).PlayNote(midi);
