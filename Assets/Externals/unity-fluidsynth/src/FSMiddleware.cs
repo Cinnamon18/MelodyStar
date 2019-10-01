@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace FluidSynth {
     public class Middleware : MiddlewareAPI {
-        //String pkg = "FluidSynth";
+        const String pkg = "FluidSynth";
         
         // FluidSynth objects
         IntPtr
@@ -43,11 +43,8 @@ namespace FluidSynth {
                           AudioSource unityAudioProvider = null) {
             {   // Create settings
                 settings = Wrapper.new_fluid_settings();
-                /*
                 Util.Assert(settings != IntPtr.Zero,
-                            ()=>{}, DestroySynth,
                             "{0}: Failed to create settings.", pkg);
-                */
                 Wrapper.fluid_settings_setint
                     (settings, "synth.sample-rate", audioSampleRate);
                 Wrapper.fluid_settings_setint
@@ -60,20 +57,15 @@ namespace FluidSynth {
 
             {   // Create MIDI synthesizer
                 synth = Wrapper.new_fluid_synth(settings);
-                /*
                 Util.Assert(synth != IntPtr.Zero,
-                            ()=>{}, DestroySynth,
                             "{0}: Failed to create synth.", pkg);
-                */
             }
         
             {   // Create audio driver
                 audioDriver = Wrapper.new_fluid_audio_driver(settings, synth);
-                /*
                 Util.Assert(audioDriver != IntPtr.Zero,
-                            ()=>{}, DestroySynth,
                             "{0}: Failed to create driver.", pkg);
-                */
+
                 // Link synth to Unity AudioSource if provided
                 if (unityAudioProvider != null) { 
                     unityAudioProvider.clip = AudioClip.Create
@@ -91,9 +83,11 @@ namespace FluidSynth {
             // MIDI device input driver
             if (hotplugMIDI) {
                 if (((MiddlewareAPI) this).ConnectMIDIDevice())
-                    Debug.Log("MIDI device connected!");
+                    Debug.Log(String.Format("{0}: MIDI device connected!",
+                                            pkg));
                 else
-                    Debug.Log("Could not find MIDI device!");
+                    Debug.Log(String.Format("{0}: Could not find MIDI device!",
+                                            pkg));
                 
                 /*
                 var onDeviceConnect = () => {
@@ -170,14 +164,15 @@ namespace FluidSynth {
                 .ToString();
             // Load SoundFont
             sfont = Wrapper.fluid_synth_sfload(synth, sfontPath, 1);
-            /*
-              return Util.Check(sfont != -1,
-              "{0}: Failed to load SoundFont: {1}",
-              pkg, sfontPath);
-            */
-            Debug.Log(String.Format("SoundFont ID: {0}", sfont));
-            if (sfont != 0)
-                return new SoundFont() { sfont_id = sfont };
+            ;
+           
+            if (Util.Check(sfont != -1,
+                           "{0}: Failed to load SoundFont: {1}",
+                           pkg, sfontPath)) {
+                Debug.Log(String.Format("{0}: SoundFont Loaded: {1}",
+                                        pkg, sfontPath));
+                return new SoundFont(sfont);
+            }
             return null;
         }
 
@@ -193,11 +188,8 @@ namespace FluidSynth {
             // Fails if no device is connected (midiDriver == IntPtr.Zero == 0)
             midiDriver = Wrapper.new_fluid_midi_driver
                 (settings, callback, (IntPtr) midiEnv);
-            /*
-              Util.Check(midiDriver != IntPtr.Zero,
-              ()=>{}, DestroySynth,
-              "{0}: Failed to create MIDI driver.", pkg);
-            */
+            Util.Check(midiDriver != IntPtr.Zero,
+                       "{0}: Failed to create MIDI driver.", pkg);
             return midiDriver != IntPtr.Zero;
         }
 
