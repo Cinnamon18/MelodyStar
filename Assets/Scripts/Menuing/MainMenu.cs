@@ -6,7 +6,9 @@ namespace Menuing {
 	public class MainMenu : MonoBehaviour {
 
 		void Start() {
-			InputSettings.setToDefault();
+			if (!InputSettings.initalized) {
+				InputSettings.setToDefault();
+			}
 		}
 
 		public void story() {

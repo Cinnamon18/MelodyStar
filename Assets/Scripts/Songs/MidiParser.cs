@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Songs {
 	public class MidiParser {
 
-		public static Songs.Model.Song readMidi(string fileName) {
+		public static List<SongNote> readMidi(string fileName) {
 			var midiFile = MidiFile.Read(fileName);
 
 			List<SongNote> notes = new List<SongNote>();
@@ -21,8 +21,7 @@ namespace Songs {
 				}
 			}
 
-			return new Songs.Model.Song(notes);
+			return notes;
 		}
-
 	}
 }

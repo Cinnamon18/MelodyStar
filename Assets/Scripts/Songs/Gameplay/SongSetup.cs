@@ -6,7 +6,18 @@ using UnityEngine;
 namespace Songs.Gameplay {
 	public class SongSetup : MonoBehaviour {
 
+		const string basePath = "Assets/Resources/";
+
 		public GameObject lanePrefab;
+
+		public Song readSong(string file) {
+			string path = "Songs/" + file + "/";
+			List<SongNote> notes = MidiParser.readMidi(basePath + path + "notes.mid");
+			AudioClip songBackground = Resources.Load<AudioClip>(path + "background");
+			AudioClip hitNoise = Resources.Load<AudioClip>(path + "instrument");
+
+			return new Song(notes, songBackground, hitNoise);
+		}
 
 		public List<Lane> setupLanes() {
 			List<Lane> lanes = new List<Lane>();

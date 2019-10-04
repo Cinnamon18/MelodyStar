@@ -8,20 +8,25 @@ namespace Songs.Gameplay {
 	public class SongManager : MonoBehaviour {
 
 		private Song song;
-		private AudioClip songBackground;
-		public AudioSource audio;
+		public SongSetup songSetup;
+		public AudioSource backgroundMusic;
+		public AudioSource instrument;
 
 		private List<Lane> lanes;
 		private float songStartTime;
 		public InputManager input;
 
 		void Start() {
-			song = MidiParser.readMidi("Assets/Resources/Songs/HotCrossBunsLow.mid");
-			songBackground = Resources.Load<AudioClip>("Songs/Megalovania");
-			audio.clip = songBackground;
-			audio.Play();
+			if (!InputSettings.initalized) {
+				InputSettings.setToDefault();
+			}
+			song = songSetup.readSong("HotCrossBunsLow");
 
-			SongSetup songSetup = gameObject.GetComponent<SongSetup>();
+			backgroundMusic.clip = song.backgroundTrack;
+			backgroundMusic.Play();
+			instrument.clip = song.instrumentSample;
+
+
 			lanes = songSetup.setupLanes();
 			songStartTime = Time.time;
 		}
@@ -54,6 +59,7 @@ namespace Songs.Gameplay {
 			foreach (int laneIdx in input.keysIndiciesPressedButton) {
 				Lane lane = lanes[laneIdx];
 				lane.makePressVFx();
+        instrument.Play();
 				GameObject lowestNote = lane.getLowestNote();
 
 				int scoreMult = Multiplier(numCorrect);
@@ -77,9 +83,6 @@ namespace Songs.Gameplay {
 
 				Destroy(lowestNote);
 			}
-			//if the answer is close. for now. just be happy.
-			//if the answer is far. for now. just be sad.
-			//maybe one for medium distance if you can swing it.
 		}
 		public static int Multiplier(int numCorrect)
 		{
