@@ -33,3 +33,7 @@ sysinfo.txt
 *.apk
 *.unitypackage
 .vscode/settings.json
+
+# Editor Temp Files
+*~
+*#
