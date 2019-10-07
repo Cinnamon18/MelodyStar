@@ -18,6 +18,17 @@ namespace Cutscene.Elements {
 			this.position = position;
 		}
 
+		public override IEnumerator doAction(
+			Canvas canvas,
+			DialogManager dialogManager,
+			Dictionary<string, Actor> actors) {
+
+			Object.Instantiate(actorPrefab, canvas.transform);
+			actors.Add(actorName, actorPrefab.GetComponent<Actor>());
+			yield return actor.fadeIn();
+			yield return dialogManager.sayText(actor, Line);
+		}
+
 		public override string ToString() {
 			return "Actor Enter: (Cutscene Object)" + "\n\tName of actor: " + actorName + " \n\t Side of actor: " + position;
 		}

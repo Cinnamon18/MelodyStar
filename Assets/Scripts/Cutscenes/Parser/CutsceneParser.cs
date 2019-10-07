@@ -26,7 +26,7 @@ namespace Cutscene {
 
 		void Awake() {
 			foreach (namedPrefabForEditor actorPrefab in actorPrefabsEditor) {
-				actorPrefabs.Add(actorPrefab.name.ToUpper(), actorPrefab.prefab);
+				actorPrefabs.Add(actorPrefab.name, actorPrefab.prefab);
 			}
 			foreach (namedPrefabForEditor backgroundPrefab in backgroundPrefabsEditor) {
 				backgroundPrefabs.Add(backgroundPrefab.name, backgroundPrefab.prefab);
@@ -96,7 +96,7 @@ namespace Cutscene {
 					default:
 						throw new InvalidScreenplaySyntaxException("Unrecognized entry side", segment);
 				}
-				string actorName = tokens[2].ToUpper();
+				string actorName = tokens[2];
 
 				GameObject actorPrefab = null;
 				try {
@@ -107,7 +107,7 @@ namespace Cutscene {
 				return new ActorEnter(actorName, actorPrefab, position);
 			} else if (tokens[0].Equals("Exit:")) {
 				// actor leaving
-				return new ActorExit(tokens[1].ToUpper());
+				return new ActorExit(tokens[1]);
 			} else {
 				//Actor Line
 				string actorName = tokens[0];

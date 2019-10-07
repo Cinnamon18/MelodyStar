@@ -8,16 +8,30 @@ namespace Cutscene {
 		public CutsceneParser cutsceneParser;
 		public TextAsset writing;
 
-		void Start() {
-			List<CutsceneElement> objects = cutsceneParser.parse(writing.text);
+		public Canvas canvas;
+		public DialogManager dialogManager;
+		public Dictionary<string, Actor> actors = new Dictionary<string, Actor>();
 
-			foreach (CutsceneElement obj in objects) {
-				Debug.Log(obj);
+		void Start() {
+			List<CutsceneElement> elements = cutsceneParser.parse(writing.text);
+
+			foreach (CutsceneElement elem in elements) {
+				Debug.Log(elem);
 			}
+			StartCoroutine(playCutscene(elements));
 		}
 
-		void Update() {
+		private IEnumerator playCutscene(List<CutsceneElement> elements) {
+			foreach(CutsceneElement element in elements) {
+				element.doAction(canvas, dialogManager, actors);
+			}
 
+			yield return null;
+			cutsceneDone();
+		}
+		
+		private void cutsceneDone() {
+			//TODO what do we do when we're done? idk!
 		}
 	}
 }

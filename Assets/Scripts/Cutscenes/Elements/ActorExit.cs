@@ -14,6 +14,17 @@ namespace Cutscene.Elements {
 			this.actorName = actorName;
 		}
 
+		public override IEnumerator doAction(
+			Canvas canvas,
+			DialogManager dialogManager,
+			Dictionary<string, Actor> actors) {
+
+			Actor actor = actors[actorName];
+			yield return actor.fadeOut();
+			actors.Remove(actorName);
+			GameObject.Destroy(actor);
+		}
+
 		public override string ToString() {
 			return "Actor Exit: (Cutscene Object)" + "\n\tName of actor: " + actorName;
 		}
