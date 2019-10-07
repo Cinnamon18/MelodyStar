@@ -20,8 +20,9 @@ namespace Cutscene.Elements {
 			DialogManager dialogManager,
 			Dictionary<string, Actor> actors) {
 
-			Actor actor = actors[actorName];
-			yield return dialogManager.sayText(actor, Line);
+			// Actor actor = actors[actorName];
+			// yield return dialogManager.sayText(actor, Line);
+			yield return null;
 		}
 
 		public override string ToString() {
