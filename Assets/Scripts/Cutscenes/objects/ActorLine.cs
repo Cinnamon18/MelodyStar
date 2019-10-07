@@ -5,6 +5,9 @@ using UnityEngine;
 namespace Cutscene
 {
 
+	/*
+	 * A piece of dialogue
+	 */
 	public class ActorLine : CutsceneObject
 	{
 		public string ActorName { get; }
@@ -25,12 +28,18 @@ namespace Cutscene
 
 		}
 
+		//Don't know if we're using .png, .jpeg or whatever.
+		public string getImageFileName(string extension)
+		{
+			return ActorName + Pose + extension;
+		}
+
 		public override void Log()
 		{
-			Debug.Log("Name of actor: " + ActorName);
-			Debug.Log("Pose: " + Pose);
-			Debug.Log("Line: \n" + Line);
-		}
+			Debug.Log("Actor Line: (Cutscene Object)");
+			Debug.Log("\tName of actor: " + ActorName);
+			Debug.Log("\tPose: " + Pose);
+			Debug.Log("\tLine: " + Line);
 	}
 }
 

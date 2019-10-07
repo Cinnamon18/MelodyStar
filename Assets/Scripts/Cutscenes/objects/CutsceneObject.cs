@@ -6,7 +6,6 @@ namespace Cutscene
 	 */
 	public abstract class CutsceneObject
 	{
-
 		public abstract void Log();
 	}
 }
