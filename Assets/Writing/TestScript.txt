@@ -1,0 +1,60 @@
+Scene: School
+
+Enter left: VIVIEN
+
+Enter right: LORELEI
+
+VIVIEN (SomewhatEmbarrassed)
+Eh…
+It was good soda. I’ll give you that.
+
+// This is a comment! It won't be parsed by the engine! say whatever you want here!
+
+VIVIEN
+Whoever chose the Agri-Cola has good taste. I never really tried the eggplant flavor before but it’s some good stuff.
+But uh, why do you want me so bad anyways? Can’t you guys find someone else?
+
+LORELEI
+But of course not! I’m ashamed you’d even ask!
+Vivien, you’re the only one who can be our fifth member!
+
+NARRATOR
+That’s a lie. 
+
+VIVIEN (Done)
+Really?
+
+LORELEI (Awkward)
+Well… uh… of course! You’re the sole person capable, Vivien.
+
+NARRATOR
+She’s trying to look dignified and composed, but her fidgeting hands give it away. It’s easy to tell that she’s not telling me the truth.
+
+VIVIEN (Done)
+Sure, okay. So what’s the real reason why you guys are so persistent?
+
+LORELEI (Sad)
+*Sigh*
+Well… I suppose there’s no point in trying to fool you any longer.
+You see Vivien, the truth is that no one else was interested in our team. At all, actually.
+Can you fathom it? Even after we went so much as to fabricate our own team entrance complete with poses and all, everybody we asked simply ran away! On sight! Before Nii even had a chance to throw a second ninja star!
+
+NARRATOR
+HMMMMM. I wonder why, huh???
+Maybe if you like, didn’t attack people on sight you might actually get some members? 
+
+VIVIEN
+Have you guys… uh. Tried advertising, like… normally?
+Without the prop swords or whatever?
+
+Scene: Outside
+
+LORELEI
+Not an option :(
+
+Exit: LORELEI
+
+VIVIEN
+They'll get there one day, I know it!
+
+Exit: VIVIEN
