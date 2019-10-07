@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MidiJack;
+using System.Collections;
 
 namespace CustomInput {
 	public class InputManager : MonoBehaviour {
@@ -40,6 +41,30 @@ namespace CustomInput {
 				}
 			}
 			keysIndiciesPressedLastFrame = new List<int>(keysIndiciesPressed);
+		}
+
+		public IEnumerator awaitKeyPress(System.Action<int> callback, List<int> keysToIgnore = null) {
+			while (this.keysIndiciesPressed.Count == 0 ||
+				(keysToIgnore?.Contains(this.keysIndiciesPressed[0]) ?? false)) {
+				yield return null;
+			}
+			callback(this.keysIndiciesPressed[0]);
+		}
+
+		public IEnumerator awaitKeyPressRaw(System.Action<int> callback, float delay = 0) {
+			yield return new WaitForSeconds(delay);
+			int keyPressed = -1;
+			while (keyPressed == -1) {
+				for (int i = 0; i < 128; i++) {
+					if (MidiMaster.GetKey(i) > 0.1f) {
+						keyPressed = i;
+					}
+				}
+				if (keyPressed == -1) {
+					yield return null;
+				}
+			}
+			callback(keyPressed);
 		}
 	}
 }

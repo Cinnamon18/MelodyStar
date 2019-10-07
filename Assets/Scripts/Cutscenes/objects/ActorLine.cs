@@ -40,7 +40,6 @@ namespace Cutscene
 			Debug.Log("\tName of actor: " + ActorName);
 			Debug.Log("\tPose: " + Pose);
 			Debug.Log("\tLine: " + Line);
-		}
 	}
 }
 
