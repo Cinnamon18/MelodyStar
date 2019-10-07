@@ -23,10 +23,10 @@ namespace Cutscene.Elements {
 			DialogManager dialogManager,
 			Dictionary<string, Actor> actors) {
 
-			Object.Instantiate(actorPrefab, canvas.transform);
-			actors.Add(actorName, actorPrefab.GetComponent<Actor>());
-			yield return actor.fadeIn();
-			yield return dialogManager.sayText(actor, Line);
+			GameObject actorGO = Object.Instantiate(actorPrefab, canvas.transform);
+			Actor actor = actorGO.GetComponent<Actor>();
+			actors.Add(actorName, actor);
+			yield return null;
 		}
 
 		public override string ToString() {

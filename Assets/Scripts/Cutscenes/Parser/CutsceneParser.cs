@@ -134,7 +134,8 @@ namespace Cutscene {
 						}
 					}
 
-					return new ActorLine(actorName, pose, line);
+					return null;
+					// return new ActorLine(actorName, pose, line);
 				} else {
 					throw new InvalidScreenplaySyntaxException("Invalid number of tokens for Actor Line", segment);
 				}
