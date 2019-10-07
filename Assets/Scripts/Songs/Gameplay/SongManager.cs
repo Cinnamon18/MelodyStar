@@ -11,7 +11,9 @@ namespace Songs.Gameplay {
 		public SongSetup songSetup;
 		public AudioSource backgroundMusic;
 		public AudioSource instrument;
-
+		public static int numPerfect;
+		public static int numGood;
+		public static int numMiss;
 		private List<Lane> lanes;
 		private float songStartTime;
 		public InputManager input;
@@ -55,7 +57,7 @@ namespace Songs.Gameplay {
 		public int numCorrect = 0;
 		PressAccuracy accuracy = PressAccuracy.Miss;
 		private void senseKeyPresses() {
-			//sense which keys are pressed
+			//sense which k_eys are pressed
 			foreach (int laneIdx in input.keysIndiciesPressedButton) {
 				Lane lane = lanes[laneIdx];
 				lane.makePressVFx();
@@ -68,16 +70,20 @@ namespace Songs.Gameplay {
 					float distance = (lowestNote.transform.position - lane.noteTarget.transform.position).magnitude;
 					if (distance < 0.5) {
 						lane.noteTapVFx(PressAccuracy.Perfect);
+						numPerfect++;
 						score += 100*scoreMult;
 						numCorrect += 1;
 					} else if (distance < 1) {
 						lane.noteTapVFx(PressAccuracy.Good);
 						score += 75*scoreMult;
 						numCorrect += 1;
-					} else {
+						numGood++;
+					}
+					else {
 						lane.noteTapVFx(PressAccuracy.Miss);
 						scoreMult = 0;
 						numCorrect = 0;
+						numMiss++;
 					}
 				}
 
@@ -113,5 +119,17 @@ namespace Songs.Gameplay {
 
 		
 
+		public static int getPerfect()
+		{
+			return numPerfect;
+		}
+		public static int getGood()
+		{
+			return numGood;
+		}
+		public static int getMiss()
+		{
+			return numMiss;
+		}
 	}
 }
