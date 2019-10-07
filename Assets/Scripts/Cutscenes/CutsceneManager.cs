@@ -1,27 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cutscene.Elements;
 
-namespace Cutscene
-{
-	public class CutsceneManager : MonoBehaviour
-	{
+namespace Cutscene {
+	public class CutsceneManager : MonoBehaviour {
+		public CutsceneParser cutsceneParser;
 		public TextAsset writing;
 
-		// Start is called before the first frame update
-		void Start()
-		{
-			List<CutsceneObject> objects = CutsceneParser.parse(writing.text);
+		void Start() {
+			List<CutsceneElement> objects = cutsceneParser.parse(writing.text);
 
-			foreach(CutsceneObject obj in objects)
-			{
-				obj.Log();
+			foreach (CutsceneElement obj in objects) {
+				Debug.Log(obj);
 			}
 		}
 
-		// Update is called once per frame
-		void Update()
-		{
+		void Update() {
 
 		}
 	}
