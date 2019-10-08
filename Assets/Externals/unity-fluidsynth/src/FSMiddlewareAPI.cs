@@ -45,6 +45,13 @@ namespace FluidSynth {
         bool StopNote(int chn, int key);
 
         /*
+         * Sets the gain of the audio output (volume multiplier).
+         * @param new gain
+         * @return success
+         */
+        bool SetGain(float gain);
+        
+        /*
          * Assign an instrument program from a bank to a MIDI channel.
          * @param channel
          * @param SoundFont to access instrument from
@@ -87,5 +94,12 @@ namespace FluidSynth {
          * @return success
          */
         bool IsMIDIDeviceConnected();
+
+        /*
+         * Frees allocated memory.
+         * Called by Finalizer.
+         * DO NOT USE OBJECT AFTER CALLING THIS FUNCTION!
+         */
+        void Cleanup();
     }
 }
