@@ -17,6 +17,9 @@ namespace FluidSynth {
             midiDriver  = IntPtr.Zero;
         int sfont = 0;
 
+        // Master audio gain (volume multiplier)
+        float audioGain;
+
         // MIDI event callback accessible variable wrapper
         GCHandle midiCallbackEnv;
         
@@ -41,14 +44,20 @@ namespace FluidSynth {
                           int   audioSampleRate = 44100,
                           int   audioPeriods    = 8,
                           int   audioPeriodSize = 512,
+                          bool  startMuted      = false,
                           bool  hotplugMIDI     = true,
                           AudioSource unityAudioProvider = null) {
-            {   // Create settings
+            {   // Create settings   
                 settings = Wrapper.new_fluid_settings();
                 Util.Assert(settings != IntPtr.Zero,
                             "{0}: Failed to create settings.", pkg);
-                Wrapper.fluid_settings_setnum
-                    (settings, "synth.gain", audioGain);
+
+                this.audioGain = audioGain;
+                if (startMuted)
+                    ((MiddlewareAPI) this).Mute();
+                else
+                    ((MiddlewareAPI) this).Unmute();
+                    
                 Wrapper.fluid_settings_setint
                     (settings, "synth.sample-rate", audioSampleRate);
                 Wrapper.fluid_settings_setint
@@ -144,9 +153,18 @@ namespace FluidSynth {
             return Wrapper.fluid_synth_noteoff(synth, chn, key) != -1;
         }
 
-        bool MiddlewareAPI.SetGain(float gain) {
+        void MiddlewareAPI.SetGain(float audioGain) {
+            this.audioGain = audioGain;
+        }
+
+        bool MiddlewareAPI.Mute() {
             return Wrapper.fluid_settings_setnum
-                (settings, "synth.gain", gain) != -1;
+                (settings, "synth.gain", 0f) != -1;
+        }
+
+        bool MiddlewareAPI.Unmute() {
+            return Wrapper.fluid_settings_setnum
+                (settings, "synth.gain", audioGain) != -1;
         }
         
         bool MiddlewareAPI.SetChannelInstrument

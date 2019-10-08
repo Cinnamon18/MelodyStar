@@ -49,7 +49,19 @@ namespace FluidSynth {
          * @param new gain
          * @return success
          */
-        bool SetGain(float gain);
+        void SetGain(float gain);
+
+        /*
+         * Mutes the audio output.
+         * @return success
+         */
+        bool Mute();
+
+        /*
+         * Unmutes the audio output.
+         * @return success
+         */
+        bool Unmute();
         
         /*
          * Assign an instrument program from a bank to a MIDI channel.

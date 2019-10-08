@@ -21,6 +21,8 @@ public class MIDIExample : MonoBehaviour {
     
     void Awake() {
         midiSys = new Middleware();
+
+        midiSys.SetGain(0.2f);
         
         var sfont = midiSys.LoadSoundFont(streamingSoundFontPath);
 
@@ -38,11 +40,11 @@ public class MIDIExample : MonoBehaviour {
     }
 
     void OnEnable() {
-        midiSys.SetGain(0.2f);
+        midiSys.Unmute();
     }
 
     void OnDisable() {
-        midiSys.SetGain(0f);
+        midiSys.Mute();
     }
 
     void OnDestroy() {
