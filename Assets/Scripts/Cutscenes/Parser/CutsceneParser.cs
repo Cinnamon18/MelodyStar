@@ -3,6 +3,8 @@ using UnityEngine;
 using Cutscene.Elements;
 using System;
 using System.Linq;
+using Utilities;
+using static Utilities.NamedPrefab;
 
 /*
  * Takes in the cutscene text and returns a list of cutscene objects
@@ -11,26 +13,18 @@ using System.Linq;
 
 namespace Cutscene {
 
-	[Serializable]
-	public struct namedPrefabForEditor {
-		public string name;
-		public GameObject prefab;
-	}
-
 	public class CutsceneParser : MonoBehaviour {
 
-		public namedPrefabForEditor[] actorPrefabsEditor;
-		public namedPrefabForEditor[] backgroundPrefabsEditor;
+		public GameObject[] actors;
+		public NamedPrefabStruct[] backgroundNamedPrefabs;
 		private Dictionary<string, GameObject> actorPrefabs = new Dictionary<string, GameObject>();
-		private Dictionary<string, GameObject> backgroundPrefabs = new Dictionary<string, GameObject>();
+		private Dictionary<string, GameObject> backgroundPrefabs;
 
 		void Awake() {
-			foreach (namedPrefabForEditor actorPrefab in actorPrefabsEditor) {
-				actorPrefabs.Add(actorPrefab.name, actorPrefab.prefab);
+			foreach (GameObject actorPrefab in actors) {
+				actorPrefabs.Add(actorPrefab.GetComponent<Actor>().name, actorPrefab);
 			}
-			foreach (namedPrefabForEditor backgroundPrefab in backgroundPrefabsEditor) {
-				backgroundPrefabs.Add(backgroundPrefab.name, backgroundPrefab.prefab);
-			}
+			backgroundPrefabs = NamedPrefab.dictFromNamedPrefabs(backgroundNamedPrefabs);
 		}
 
 		public List<CutsceneElement> parse(string cutsceneText) {
@@ -48,8 +42,6 @@ namespace Cutscene {
 					}
 				} catch (InvalidScreenplaySyntaxException ex) {
 					Debug.LogError(ex.Message);
-					//newCutsceneObject = new ActorLine("George P. Burdell", "Shocked", "Some noob messed up the script syntax.");
-					//objects.Add(newCutsceneObject);
 				}
 			}
 
@@ -58,7 +50,7 @@ namespace Cutscene {
 
 		private CutsceneElement BuildObject(string segment) {
 			//need to get each individual line in a segment
-			string[] subSegments = segment.Split('\n');
+			string[] subSegments = segment.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 			string header = subSegments[0];
 			string[] tokens = header.Split(' ');
 
@@ -81,16 +73,15 @@ namespace Cutscene {
 				}
 			} else if (tokens[0].Equals("Enter")) {
 				// New actor
-				string side = tokens[1].Substring(0, tokens[1].Length - 1);
 				CutscenePosition position = CutscenePosition.Center;
-				switch (side.ToLower()) {
-					case "left":
+				switch (tokens[1].ToLower()) {
+					case "left:":
 						position = CutscenePosition.Left;
 						break;
-					case "center":
+					case "center:":
 						position = CutscenePosition.Center;
 						break;
-					case "right":
+					case "right:":
 						position = CutscenePosition.Right;
 						break;
 					default:
@@ -124,7 +115,7 @@ namespace Cutscene {
 						}
 					} else {
 						//Pose is default
-						pose = "Normal";
+						pose = "Neutral";
 					}
 
 					if (subSegments.Length > 1) {
@@ -134,32 +125,40 @@ namespace Cutscene {
 						}
 					}
 
-					return null;
-					// return new ActorLine(actorName, pose, line);
+					return new ActorLine(actorName, pose, line);
 				} else {
 					throw new InvalidScreenplaySyntaxException("Invalid number of tokens for Actor Line", segment);
 				}
 			}
 		}
 
+		// Old implementation had annoying platform dependence issues.
+		private string[] splitText(string cutsceneText) {
+			string[] lines = cutsceneText.Split(
+				new[] { "\r\n\r\n", "\r\r", "\n\n" },
+				StringSplitOptions.None
+			);
+			return lines;
+		}
+
 		//split the text into smaller chunks that each represent a single cutscene object
 		//string segments are separated by two new line chars.
-		private string[] splitText(string cutsceneText) {
-			List<string> segments = new List<string>();
-			int start = 0;
-			for (int i = 0; i < cutsceneText.Length - 2; i++) {
-				if (cutsceneText.Substring(i, 3).Equals("\n\r\n")) {
-					segments.Add(cutsceneText.Substring(start, i - start));
-					start = i + 3;
-				}
-			}
+		// private string[] splitText(string cutsceneText) {
+		// 	List<string> segments = new List<string>();
+		// 	int start = 0;
+		// 	for (int i = 0; i < cutsceneText.Length - 2; i++) {
+		// 		if (cutsceneText.Substring(i, 3).Equals("\n\r\n")) {
+		// 			segments.Add(cutsceneText.Substring(start, i - start));
+		// 			start = i + 3;
+		// 		}
+		// 	}
 
-			List<string> purifiedSegments = new List<string>();
-			foreach(string segment in segments) {
-				purifiedSegments.Add(segment.Replace("\r", ""));
-			}
+		// 	List<string> purifiedSegments = new List<string>();
+		// 	foreach(string segment in segments) {
+		// 		purifiedSegments.Add(segment.Replace("\r", ""));
+		// 	}
 
-			return purifiedSegments.ToArray();
-		}
+		// 	return purifiedSegments.ToArray();
+		// }
 	}
 }

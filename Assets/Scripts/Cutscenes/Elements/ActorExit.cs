@@ -15,18 +15,19 @@ namespace Cutscene.Elements {
 		}
 
 		public override IEnumerator doAction(
-			Canvas canvas,
+			CutsceneVisualsManager cutsceneVisuals,
 			DialogManager dialogManager,
 			Dictionary<string, Actor> actors) {
 
 			Actor actor = actors[actorName];
 			yield return actor.fadeOut();
+			yield return dialogManager.removeActor(actor);
 			actors.Remove(actorName);
 			GameObject.Destroy(actor);
 		}
 
 		public override string ToString() {
-			return "Actor Exit: (Cutscene Object)" + "\n\tName of actor: " + actorName;
+			return "Actor Exit: (Cutscene Object)" + "\tName of actor: " + actorName;
 		}
 	}
 }

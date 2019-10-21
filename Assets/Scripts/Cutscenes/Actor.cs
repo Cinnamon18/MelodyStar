@@ -1,26 +1,42 @@
 using System.Collections;
+using System.Collections.Generic;
 using Cutscene.Elements;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
+using static Utilities.NamedPrefab;
 
 namespace Cutscene {
 	public class Actor : MonoBehaviour {
+		public NamedSpriteStruct[] expressionNamedSprites;
+		private Dictionary<string, Sprite> expressionSprites;
+		public string actorName;
 		public Image image;
-		public string name;
+
+		[HideInInspector]
 		public CutscenePosition position;
 
+		public void Awake() {
+			expressionSprites = NamedPrefab.dictFromNamedSprites(expressionNamedSprites);
+			image.sprite = expressionSprites["Neutral"];
+		}
+
+		public void changePose(string pose) {
+			image.sprite = expressionSprites[pose];
+		}
+
 		public IEnumerator fadeIn() {
-			yield return Util.Lerp(0.5f, (float progress) => {
-				image.color = new Color(image.color.r, image.color.g, image.color.b, progress);
-			});
+			yield return Util.fadeIn(image);
 		}
 
 		public IEnumerator fadeOut() {
-			yield return Util.Lerp(0.5f, (float progress) => {
-				image.color = new Color(image.color.r, image.color.g, image.color.b, 1 - progress);
-			});
+			yield return Util.fadeOut(image);
 		}
+
+		public override string ToString() {
+			return "Actor " + actorName + " in position " + position;
+		}
+
 
 	}
 }
