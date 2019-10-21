@@ -16,17 +16,17 @@ namespace Cutscene.Elements {
 		}
 
 		public override IEnumerator doAction(
-			Canvas canvas,
+			CutsceneVisualsManager cutsceneVisuals,
 			DialogManager dialogManager,
 			Dictionary<string, Actor> actors) {
 
-			// Actor actor = actors[actorName];
-			// yield return dialogManager.sayText(actor, Line);
+			
+			
 			yield return null;
 		}
 
 		public override string ToString() {
-			return "Scene Transition: (Cutscene Object)" + "\n\tScene Name: " + scenePrefab;
+			return "Scene Transition: (Cutscene Object)" + "\tScene Name: " + scenePrefab;
 		}
 	}
 }

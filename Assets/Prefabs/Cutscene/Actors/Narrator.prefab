@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &423195732294963646
+--- !u!1 &6423410586430329073
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 423195732294963641}
-  - component: {fileID: 423195732294963643}
-  - component: {fileID: 423195732294963640}
+  - component: {fileID: 6423410586430329074}
+  - component: {fileID: 6423410586430329084}
+  - component: {fileID: 6423410586430329075}
+  - component: {fileID: 6423410585253013531}
   m_Layer: 5
-  m_Name: Idol1
+  m_Name: Narrator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &423195732294963641
+--- !u!224 &6423410586430329074
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423195732294963646}
+  m_GameObject: {fileID: 6423410586430329073}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,24 +35,24 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -300, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 363, y: -0}
+  m_SizeDelta: {x: 361.7, y: 756.6}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &423195732294963643
+--- !u!222 &6423410586430329084
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423195732294963646}
+  m_GameObject: {fileID: 6423410586430329073}
   m_CullTransparentMesh: 0
---- !u!114 &423195732294963640
+--- !u!114 &6423410586430329075
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423195732294963646}
+  m_GameObject: {fileID: 6423410586430329073}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -65,7 +66,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 21606e2676aab7145ae952717b84e7f8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 292dc03eb92f04f41bbe664143e52b83, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -75,3 +76,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6423410585253013531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6423410586430329073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e4a0c4683f30d46ba9a93fd0f0c976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expressionNamedSprites:
+  - name: Neutral
+    prefab: {fileID: 21300000, guid: 292dc03eb92f04f41bbe664143e52b83, type: 3}
+  actorName: Narrator
+  image: {fileID: 6423410586430329075}
+  position: 0

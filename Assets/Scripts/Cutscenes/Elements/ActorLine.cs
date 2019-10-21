@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utilities;
 
@@ -10,14 +12,14 @@ namespace Cutscene.Elements {
 	 */
 	public class ActorLine : CutsceneElement {
 		public string actorName { get; }
-		public string Pose { get; } //Image?
-		public string Line { get; }
+		public string pose { get; } //Image?
+		public string line { get; }
 
 
 		public ActorLine(string actorName, string pose, string line) {
 			this.actorName = actorName;
-			Pose = pose;	
-			Line = line;
+			this.pose = pose;	
+			this.line = line;
 		}
 
 		public ActorLine(string actorName, string line)
@@ -26,16 +28,24 @@ namespace Cutscene.Elements {
 		}
 
 		public override IEnumerator doAction(
-			Canvas canvas,
+			CutsceneVisualsManager cutsceneVisuals,
 			DialogManager dialogManager,
 			Dictionary<string, Actor> actors) {
-				
-			Actor actor = actors[actorName];
-			yield return dialogManager.sayText(actor, Line);
+			
+			Actor actor = null;
+			try {
+				actor = actors[actorName];
+			} catch (KeyNotFoundException e) {
+				Debug.LogError("Error: actor \"" + actorName + "\" for line \"" + line + "\" not found in actors list. Actors list contents: ");
+				Debug.LogError(String.Join(", ", actors.ToArray()));
+				throw e;
+			}
+			actor.changePose(pose);
+			yield return dialogManager.sayText(actor, line);
 		}
 
 		public override string ToString() {
-			return "Actor Line: (Cutscene Object)" + "\n\tName of actor: " + actorName + "\\n\tPose: " + Pose + "\n\tLine: " + Line;
+			return "Actor Line: (Cutscene Object)" + "\tName of actor: " + actorName + "\tPose: " + pose + "\tLine: " + line;
 		}
 	}
 }

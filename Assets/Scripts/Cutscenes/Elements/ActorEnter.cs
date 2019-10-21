@@ -10,27 +10,32 @@ namespace Cutscene.Elements {
 	public class ActorEnter : CutsceneElement {
 		public GameObject actorPrefab { get; }
 		public CutscenePosition position { get; }
-		public string actorName { get; }
+		private string actorName;
 
 		public ActorEnter(string actorName, GameObject actorPrefab, CutscenePosition position) {
-			this.actorName = actorName;
 			this.actorPrefab = actorPrefab;
 			this.position = position;
+			this.actorName = actorName;
 		}
 
 		public override IEnumerator doAction(
-			Canvas canvas,
+			CutsceneVisualsManager cutsceneVisuals,
 			DialogManager dialogManager,
 			Dictionary<string, Actor> actors) {
 
-			GameObject actorGO = Object.Instantiate(actorPrefab, canvas.transform);
+			GameObject actorGO = Object.Instantiate(actorPrefab, cutsceneVisuals.canvas.transform);
+
 			Actor actor = actorGO.GetComponent<Actor>();
-			actors.Add(actorName, actor);
-			yield return null;
+			actor.position = position;
+			actors.Add(actor.actorName, actor);
+
+			yield return cutsceneVisuals.addActor(actor, position);
+			yield return dialogManager.addActor(actor);
+			yield return actor.fadeIn();
 		}
 
 		public override string ToString() {
-			return "Actor Enter: (Cutscene Object)" + "\n\tName of actor: " + actorName + " \n\t Side of actor: " + position;
+			return "Actor Enter: (Cutscene Object)" + "\tName of actor: " + actorName + " \t Side of actor: " + position;
 		}
 	}
 }
