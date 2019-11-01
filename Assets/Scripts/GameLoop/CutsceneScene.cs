@@ -10,9 +10,6 @@ namespace GameLoop {
 
 		public override void advance() {
 			CutsceneManager cutsceneManager = Object.FindObjectOfType<CutsceneManager>();
-			Debug.Log("uwuuww");
-			Debug.Log(band);
-			Debug.Log(sceneID);
 			cutsceneManager.bandName = band;
 			cutsceneManager.cutsceneName = sceneID;
 		}

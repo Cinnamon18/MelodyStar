@@ -16,8 +16,6 @@ namespace Cutscene {
 
 		void Start() {
 			TextAsset writing = Resources.Load<TextAsset>("Writing/" + bandName + "/" + cutsceneName);
-			Debug.Log(bandName);
-			Debug.Log(cutsceneName);
 			List<CutsceneElement> elements = cutsceneParser.parse(writing.text);
 
 			// foreach (CutsceneElement elem in elements) {
