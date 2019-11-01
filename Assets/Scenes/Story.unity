@@ -805,7 +805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutsceneParser: {fileID: 1150208959}
-  writing: {fileID: 4900000, guid: f2bdd831138dc20448407da8de885011, type: 3}
+  writing: {fileID: 4900000, guid: 12aa00a446f73124fa70e23ddb38540e, type: 3}
   cutsceneVisuals: {fileID: 642665637}
   dialogManager: {fileID: 642665636}
 --- !u!4 &1150208958

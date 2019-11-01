@@ -1,9 +1,12 @@
 using System.Linq;
 using CustomInput;
 using UnityEngine;
+using GameLoop;
 
 namespace Menuing {
 	public class MainMenu : MonoBehaviour {
+
+		public GameLoopManager gameLoopManager;
 
 		void Start() {
 			if (!InputSettings.initalized) {
@@ -12,7 +15,7 @@ namespace Menuing {
 		}
 
 		public void story() {
-			StartCoroutine(SceneTransition.LoadScene("Story"));
+			StartCoroutine(gameLoopManager.advance());
 		}
 
 		public void freePlay() {

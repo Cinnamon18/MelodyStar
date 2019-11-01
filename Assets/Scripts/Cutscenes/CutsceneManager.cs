@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cutscene.Elements;
+using GameLoop;
 
 namespace Cutscene {
 	public class CutsceneManager : MonoBehaviour {
 		public CutsceneParser cutsceneParser;
-		public TextAsset writing;
+		public string bandName;
+		public string cutsceneName;
 
 		public CutsceneVisualsManager cutsceneVisuals;
 		public DialogManager dialogManager;
 		public Dictionary<string, Actor> actors = new Dictionary<string, Actor>();
 
 		void Start() {
+			TextAsset writing = Resources.Load<TextAsset>("Writing/" + bandName + "/" + cutsceneName);
+			Debug.Log(bandName);
+			Debug.Log(cutsceneName);
 			List<CutsceneElement> elements = cutsceneParser.parse(writing.text);
 
 			// foreach (CutsceneElement elem in elements) {
@@ -31,7 +36,7 @@ namespace Cutscene {
 		}
 		
 		private void cutsceneDone() {
-			//TODO what do we do when we're done? idk!
+			StartCoroutine(	Object.FindObjectOfType<GameLoopManager>().advance());
 		}
 	}
 }
