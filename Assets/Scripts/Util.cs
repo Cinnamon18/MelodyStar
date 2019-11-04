@@ -17,14 +17,14 @@ namespace Utilities {
 			perStep(1);
 		}
 
-		public static IEnumerator fadeIn(Image image) {
-			yield return Util.Lerp(0.5f, (float progress) => {
+		public static IEnumerator fadeIn(Image image, float time) {
+			yield return Util.Lerp(time, (float progress) => {
 				image.color = new Color(image.color.r, image.color.g, image.color.b, progress);
 			});
 		}
 
-		public static IEnumerator fadeOut(Image image) {
-			yield return Util.Lerp(0.5f, (float progress) => {
+		public static IEnumerator fadeOut(Image image, float time) {
+			yield return Util.Lerp(time, (float progress) => {
 				image.color = new Color(image.color.r, image.color.g, image.color.b, 1 - progress);
 			});
 		}
