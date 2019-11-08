@@ -8,11 +8,14 @@ namespace Cutscene.Elements {
 	 * Transition to a new scene
 	 */
 	public class CutsceneTransition : CutsceneElement {
-		public GameObject scenePrefab { get; }
+		public Sprite background { get; }
+		public bool isFirstBackground;
 
 
-		public CutsceneTransition(GameObject scenePrefab) {
-			this.scenePrefab = scenePrefab;
+		public CutsceneTransition(Sprite background, bool isFirstBackground) {
+			Debug.Log(isFirstBackground);
+			this.background = background;
+			this.isFirstBackground = isFirstBackground;
 		}
 
 		public override IEnumerator doAction(
@@ -21,12 +24,11 @@ namespace Cutscene.Elements {
 			Dictionary<string, Actor> actors) {
 
 			
-			
-			yield return null;
+			yield return cutsceneVisuals.setBackground(background, isFirstBackground ? 0.0f : 0.5f);
 		}
 
 		public override string ToString() {
-			return "Scene Transition: (Cutscene Object)" + "\tScene Name: " + scenePrefab;
+			return "Scene Transition: (Cutscene Object)" + "\tScene Name: " + background;
 		}
 	}
 }

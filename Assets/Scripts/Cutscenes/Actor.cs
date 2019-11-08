@@ -26,11 +26,11 @@ namespace Cutscene {
 		}
 
 		public IEnumerator fadeIn() {
-			yield return Util.fadeIn(image);
+			yield return Util.fadeIn(image, 0.5f);
 		}
 
 		public IEnumerator fadeOut() {
-			yield return Util.fadeOut(image);
+			yield return Util.fadeOut(image, 0.5f);
 		}
 
 		public override string ToString() {

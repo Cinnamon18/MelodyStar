@@ -864,11 +864,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1998456349047679093, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
         type: 3}
-      propertyPath: audio
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998456349047679093, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
-        type: 3}
       propertyPath: backgroundMusic
       value: 
       objectReference: {fileID: 1850394270}
@@ -877,22 +872,5 @@ PrefabInstance:
       propertyPath: instrument
       value: 
       objectReference: {fileID: 1870388496}
-    - target: {fileID: 1998456349047679093, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
-        type: 3}
-      propertyPath: songSetup
-      value: 
-      objectReference: {fileID: 1416981623886133891}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efc2cb983dc2c0f4a92fcad6ad4ace06, type: 3}
---- !u!114 &1416981623886133891 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1416981625138717274, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
-    type: 3}
-  m_PrefabInstance: {fileID: 1416981623886133890}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e29c49d4f591e346b789d8bd8b107bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

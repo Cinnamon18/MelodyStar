@@ -14,6 +14,11 @@ namespace Songs.Gameplay {
 			string path = "Songs/" + file + "/";
 			List<SongNote> notes = MidiParser.readMidi(basePath + path + "notes.mid");
 			AudioClip songBackground = Resources.Load<AudioClip>(path + "background");
+		}
+		public Song readSong(string band, string file) {
+			string path = "Songs/" + band + "/" + file + "/";
+			List<SongNote> notes = MidiParser.readMidi(basePath + path + "player.mid");
+			AudioClip songBackground = Resources.Load<AudioClip>(path + "backing");
 			AudioClip hitNoise = Resources.Load<AudioClip>(path + "instrument");
 
 			return new Song(notes, songBackground, hitNoise);

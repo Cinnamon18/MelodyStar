@@ -27,6 +27,15 @@ namespace Songs.Gameplay {
 			}
 			song = SongSetup.readSong("HotCrossBunsLow");
 
+		public string bandName;
+		public string songName;
+
+		void Start() {
+			if (!InputSettings.initalized) {
+				InputSettings.setToDefault();
+			}
+			song = songSetup.readSong(bandName, songName);
+
 			backgroundMusic.clip = song.backgroundTrack;
 
 		}
@@ -60,15 +69,17 @@ namespace Songs.Gameplay {
 				}
 			}
 		}
+
+		[HideInInspector]
 		public int score = 0;
+		[HideInInspector]
 		public int numCorrect = 0;
-		PressAccuracy accuracy = PressAccuracy.Miss;
 		private void senseKeyPresses() {
 			//sense which k_eys are pressed
 			foreach (int laneIdx in input.keysIndiciesPressedButton) {
 				Lane lane = lanes[laneIdx];
 				lane.makePressVFx();
-        instrument.Play();
+				instrument.Play();
 				GameObject lowestNote = lane.getLowestNote();
 
 				int scoreMult = Multiplier(numCorrect);
@@ -77,12 +88,12 @@ namespace Songs.Gameplay {
 					float distance = (lowestNote.transform.position - lane.noteTarget.transform.position).magnitude;
 					if (distance < 0.5) {
 						lane.noteTapVFx(PressAccuracy.Perfect);
-						score += 100*scoreMult;
+						score += 100 * scoreMult;
 						numCorrect += 1;
 						numPerfect++;
 					} else if (distance < 1) {
 						lane.noteTapVFx(PressAccuracy.Good);
-						score += 75*scoreMult;
+						score += 75 * scoreMult;
 						numCorrect += 1;
 						numGood++;
 					}
@@ -97,25 +108,16 @@ namespace Songs.Gameplay {
 				Destroy(lowestNote);
 			}
 		}
-		public static int Multiplier(int numCorrect)
-		{
-			if (numCorrect > 200)
-			{
+		public static int Multiplier(int numCorrect) {
+			if (numCorrect > 200) {
 				return 8;
-			}
-			else if (numCorrect > 100)
-			{
+			} else if (numCorrect > 100) {
 				return 4;
-			}
-			else if (numCorrect > 50)
-			{
+			} else if (numCorrect > 50) {
 				return 2;
-			}
-			else
-			{
+			} else {
 				return 1;
 			}
-
 		}
 		
 		public int getPerfect()
