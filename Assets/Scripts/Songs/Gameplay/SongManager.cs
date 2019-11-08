@@ -3,28 +3,35 @@ using CustomInput;
 using Songs.Model;
 using UnityEngine;
 using Melanchall.DryWetMidi.MusicTheory;
+using Songs.Gameplay;
 
 namespace Songs.Gameplay {
 	public class SongManager : MonoBehaviour {
 
-		private Song song;
+		public Song song;
 		public SongSetup songSetup;
 		public AudioSource backgroundMusic;
 		public AudioSource instrument;
-		public static int numPerfect;
-		public static int numGood;
-		public static int numMiss;
-		private List<Lane> lanes;
-		private float songStartTime;
+		public int numPerfect;
+		public int numGood;
+		public int numMiss;
+		public List<Lane> lanes;
+		public float songStartTime;
 		public InputManager input;
-
-		void Start() {
-			if (!InputSettings.initalized) {
+		
+		void Awake()
+		{
+			if (!InputSettings.initalized)
+			{
 				InputSettings.setToDefault();
 			}
-			song = songSetup.readSong("HotCrossBunsLow");
+			song = SongSetup.readSong("HotCrossBunsLow");
 
 			backgroundMusic.clip = song.backgroundTrack;
+
+		}
+
+		void Start() {
 			backgroundMusic.Play();
 			instrument.clip = song.instrumentSample;
 
@@ -70,9 +77,9 @@ namespace Songs.Gameplay {
 					float distance = (lowestNote.transform.position - lane.noteTarget.transform.position).magnitude;
 					if (distance < 0.5) {
 						lane.noteTapVFx(PressAccuracy.Perfect);
-						numPerfect++;
 						score += 100*scoreMult;
 						numCorrect += 1;
+						numPerfect++;
 					} else if (distance < 1) {
 						lane.noteTapVFx(PressAccuracy.Good);
 						score += 75*scoreMult;
@@ -110,26 +117,26 @@ namespace Songs.Gameplay {
 			}
 
 		}
-
-
-
-
-
-
-
 		
-
-		public static int getPerfect()
+		public int getPerfect()
 		{
 			return numPerfect;
 		}
-		public static int getGood()
+		public int getGood()
 		{
 			return numGood;
 		}
-		public static int getMiss()
+		public int getMiss()
 		{
 			return numMiss;
+		}
+		public float getStartTime()
+		{
+			return songStartTime;
+		}
+		public int getScore()
+		{
+			return score;
 		}
 	}
 }

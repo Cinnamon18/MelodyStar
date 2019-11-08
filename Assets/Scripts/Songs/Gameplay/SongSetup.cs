@@ -10,7 +10,7 @@ namespace Songs.Gameplay {
 
 		public GameObject lanePrefab;
 
-		public Song readSong(string file) {
+		public static Song readSong(string file) {
 			string path = "Songs/" + file + "/";
 			List<SongNote> notes = MidiParser.readMidi(basePath + path + "notes.mid");
 			AudioClip songBackground = Resources.Load<AudioClip>(path + "background");
