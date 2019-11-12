@@ -55,7 +55,18 @@ namespace CustomInput {
 		}
 
 		public void mainMenu() {
+			saveSettings();
 			StartCoroutine(SceneTransition.LoadScene("MainMenu"));
+		}
+
+		private void saveSettings()
+		{
+			//TESTING
+			//Debug.Log("Saved Settings");
+			PlayerPrefs.SetInt("saved", 1);
+			PlayerPrefs.SetString("keys", InputSettings.getKeysString());
+			PlayerPrefs.SetInt("inputMode", (int)InputSettings.inputMode);
+			PlayerPrefs.SetInt("middleC", InputSettings.middleC);
 		}
 	}
 }
