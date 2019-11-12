@@ -30,6 +30,7 @@ namespace CustomInput {
 			InputSettings.inputMode = InputMode.MIDI;
 			InputSettings.middleC = defaultMiddleCMidi;
 			initalized = true;
+
 		}
 
 		public static void setToPrefs()

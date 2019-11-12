@@ -1,21 +1,26 @@
 using System.Linq;
 using CustomInput;
 using UnityEngine;
+using GameLoop;
 
 namespace Menuing {
 	public class MainMenu : MonoBehaviour {
+    
+		public GameLoopManager gameLoopManager;
 
 		void Start() {
 			if(PlayerPrefs.HasKey("saved"))
 			{
 				InputSettings.setToPrefs();
-			} else if (!InputSettings.initalized) {
+			} 
+      else if (!InputSettings.initalized) 
+      {
 				InputSettings.setToDefault();
 			}
 		}
 
 		public void story() {
-			StartCoroutine(SceneTransition.LoadScene("Story"));
+			StartCoroutine(gameLoopManager.advance());
 		}
 
 		public void freePlay() {
@@ -29,8 +34,5 @@ namespace Menuing {
 		public void quit() {
 			Application.Quit();
 		}
-
-
-
 	}
 }

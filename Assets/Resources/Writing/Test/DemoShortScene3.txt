@@ -1,0 +1,11 @@
+Scene: School
+
+Enter left: Idol1
+
+Enter right: Idol2
+
+Idol1
+Last lightning round
+
+Idol2
+アニメのゲームはじゃないです！

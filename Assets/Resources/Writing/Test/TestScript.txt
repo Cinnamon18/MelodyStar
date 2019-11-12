@@ -1,0 +1,94 @@
+Scene: School
+
+Enter left: Idol1
+
+Enter right: Idol2
+
+// Idol1 (SomewhatEmbarrassed)
+// Eh…
+// It was good soda. I’ll give you that.
+
+// This is a comment! It won't be parsed by the engine! say whatever you want here!
+
+// Idol1
+// Whoever chose the Agri-Cola has good taste. I never really tried the eggplant flavor before but it’s some good stuff.
+// But uh, why do you want me so bad anyways? Can’t you guys find someone else?
+
+// Idol2
+// But of course not! I’m ashamed you’d even ask!
+// Idol1, you’re the only one who can be our fifth member!
+
+// Enter center: Narrator
+
+// Narrator
+// That’s a lie. 
+
+// Idol1 (Done)
+// Really?
+
+// Idol2 (Awkward)
+// Well… uh… of course! You’re the sole person capable, Idol1.
+
+// Narrator
+// She’s trying to look dignified and composed, but her fidgeting hands give it away. It’s easy to tell that she’s not telling me the truth.
+
+// Idol1 (Done)
+// Sure, okay. So what’s the real reason why you guys are so persistent?
+
+// Idol2 (Sad)
+// *Sigh*
+// Well… I suppose there’s no point in trying to fool you any longer.
+// You see Idol1, the truth is that no one else was interested in our team. At all, actually.
+// Can you fathom it? Even after we went so much as to fabricate our own team entrance complete with poses and all, everybody we asked simply ran away! On sight! Before Nii even had a chance to throw a second ninja star!
+
+// Narrator
+// HMMMMM. I wonder why, huh???
+// Maybe if you like, didn’t attack people on sight you might actually get some members? 
+
+// Idol1
+// Have you guys… uh. Tried advertising, like… normally?
+// Without the prop swords or whatever?
+
+Idol1
+Hey Idol2! How's it goin'?
+
+Idol2 (Angey)
+Look at my face. I'm angey.
+
+Idol1 (Sad)
+Awww! When you're sad, I'm sad.
+Let's get some fresh air! That'll make you feel better!
+
+Scene: Outside
+
+Idol2 (Surprised)
+Wow! A Whole new background!
+
+Idol1 (Precious)
+Do you like it?
+
+Idol2 (Precious)
+I love it! Just like I love you!
+
+Audience
+Awwwwwwwwwwwww
+
+Idol1
+Ok see ya.
+
+Idol2
+Bye!
+
+Exit: Idol1
+
+Exit: Idol2
+
+// Idol2
+// Not an option :(
+
+// Exit: Idol2
+
+// Idol1
+// They'll get there one day, I know it!
+
+// Exit: Idol1
