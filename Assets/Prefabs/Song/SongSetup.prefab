@@ -59,8 +59,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39693e83485b45c48bbfd5eab3ca863a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 0}
+  songSetup: {fileID: 1416981625138717274}
+  backgroundMusic: {fileID: 0}
+  instrument: {fileID: 0}
   input: {fileID: 192992461}
+  bandName: Test
+  songName: HotCrossBunsLow
+  score: 0
+  numCorrect: 0
 --- !u!114 &192992461
 MonoBehaviour:
   m_ObjectHideFlags: 0

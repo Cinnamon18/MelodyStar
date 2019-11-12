@@ -143,7 +143,7 @@ public static class Utility
     }
     
 
-    float GetApproxBezierArcLength(Vector3 actualA, Vector3 actualB, Vector3 actualC,
+    /*public static float GetApproxBezierArcLength(Vector3 actualA, Vector3 actualB, Vector3 actualC,
      Vector3 tempA, Vector3 tempB, Vector3 tempC, float fractionOfTotalCurveCoveredByTemp, float fractionFromStartOfCurve, int recursions) {
 
         if (recursions == 0) {
@@ -157,7 +157,32 @@ public static class Utility
         Vector3 halfway = Bezier(actualA, actualB, actualC, fractionOfTotalCurveCoveredByTemp * .5f);
         Vector3 threeQuarters = Bezier(actualA, actualB, actualC, fractionOfTotalCurveCoveredByTemp * .75f);
 
-        return GetApproxBezierArcLength(actualA, actualB, actualC, quarter, tempA, b, fractionOfTotalCurveCoveredByTemp / 2, recursions - 1)
+        return GetApproxBezierArcLength(actualA, actualB, actualC, quarter, tempA, b, fractionOfTotalCurveCoveredByTemp / 2, recursions - 1);
+    }*/
+
+    public static float ApproxBezierArcLength(Vector3 a, Vector3 b, Vector3 c, float start, float end, int recursions) {
+
+        if (recursions == 0) {
+            Vector3 point1 = Bezier(a, b, c, start);
+            Vector3 point2 = Bezier(a, b, c, (end - start) / 2);
+            Vector3 point3 = Bezier(a, b, c, end);
+            float chordLength1 = (point2 - point1).magnitude;
+            float chordLength2 = (point3 - point2).magnitude;
+
+            return chordLength1 + chordLength2;
+        } else  {
+            float midpoint = (end - start) / 2.0f;
+            float recursiveFirstHalfLength = ApproxBezierArcLength(a, b, c, start, midpoint, recursions - 1);
+            float recursiveSecondHalfLength = ApproxBezierArcLength(a, b, c, midpoint, end, recursions - 1);
+
+            return recursiveFirstHalfLength + recursiveSecondHalfLength;
+        }
+    }
+
+    public static float ApproxTSplineArcLength(Vector3 a, Vector3 dirA, Vector3 b, Vector3 dirB, int recursions) {
+        
+        Vector3 midpoint = TSpline(a, dirA, b, dirB, .5f);
+        return ApproxBezierArcLength(a, midpoint, b, 0, 1, recursions);
     }
 
 
