@@ -26,6 +26,10 @@ namespace Menuing {
 			StartCoroutine(SceneTransition.LoadScene("Configure"));
 		}
 
+		public void credits() {
+			StartCoroutine(SceneTransition.LoadScene("Credits"));
+		}
+
 		public void quit() {
 			Application.Quit();
 		}

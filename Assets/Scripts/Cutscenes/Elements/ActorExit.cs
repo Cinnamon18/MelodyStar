@@ -14,15 +14,12 @@ namespace Cutscene.Elements {
 			this.actorName = actorName;
 		}
 
-		public override IEnumerator doAction(
-			CutsceneVisualsManager cutsceneVisuals,
-			DialogManager dialogManager,
-			Dictionary<string, Actor> actors) {
+		public override IEnumerator doAction(CutsceneManager cutsceneManager) {
 
-			Actor actor = actors[actorName];
+			Actor actor = cutsceneManager.actors[actorName];
 			yield return actor.fadeOut();
-			yield return dialogManager.removeActor(actor);
-			actors.Remove(actorName);
+			yield return cutsceneManager.dialogManager.removeActor(actor);
+			cutsceneManager.actors.Remove(actorName);
 			GameObject.Destroy(actor);
 		}
 

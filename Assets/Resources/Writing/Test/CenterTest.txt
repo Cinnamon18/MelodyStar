@@ -1,0 +1,70 @@
+Scene: School
+
+//Introduction to the bandmembers and the main conflict. First meeting with the main character
+
+Enter center: Idol1
+
+Enter right: Idol2
+
+Enter left: Idol3
+
+Narrator
+Man, I’m glad to sit down and have a bite to eat. I hope this group coming in doesn’t prove to be something awful.
+
+Idol1
+Hey, right now we need to find a new keyboardist. We can point fingers later.
+
+Idol2
+And how are we supposed to play like this again?
+
+Idol1
+By playing.
+
+Idol3
+You’re the one bringing up all the issues.
+
+Idol2
+Just because you’ve locked up all your emotions doesn’t mean they’re not there.
+
+Idol3
+You’re one to talk. You wouldn’t know what locking your emotions up looked like if it hit you with a truck.
+
+Idol2
+And you wouldn’t know what intimacy looked like if it bit you on the ass.
+
+Idol1
+Really, Idol2, are you seriously making this about virginity? What are you, a teenage boy?
+
+Idol3
+You know she is.
+
+Idol2
+Hey!
+
+Idol1 (Amused)
+Enough with the ribbing already. Look, we’re weirding out this poor person out.
+
+Narrator
+You’re honestly pretty funny. Hey, did I hear you say that you were looking for a keyboardist?
+
+Idol1
+Yes-
+
+Idol2
+No.
+
+Idol1
+Yes, we are.
+Would you be down to play a handful of gigs?
+
+Idol3
+Around, like, 10
+
+Idol2
+More like 2
+
+Idol1
+Actually, we’re booked for about 4 or 5 coming up. If you can put up with the rest of the band, that is.
+
+Narrator
+Sounds good to me.

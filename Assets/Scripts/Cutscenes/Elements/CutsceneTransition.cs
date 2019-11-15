@@ -13,18 +13,14 @@ namespace Cutscene.Elements {
 
 
 		public CutsceneTransition(Sprite background, bool isFirstBackground) {
-			Debug.Log(isFirstBackground);
 			this.background = background;
 			this.isFirstBackground = isFirstBackground;
 		}
 
-		public override IEnumerator doAction(
-			CutsceneVisualsManager cutsceneVisuals,
-			DialogManager dialogManager,
-			Dictionary<string, Actor> actors) {
+		public override IEnumerator doAction(CutsceneManager cutsceneManager) {
 
-			
-			yield return cutsceneVisuals.setBackground(background, isFirstBackground ? 0.0f : 0.5f);
+
+			yield return cutsceneManager.cutsceneVisuals.setBackground(background, isFirstBackground ? 0.0f : 0.5f);
 		}
 
 		public override string ToString() {

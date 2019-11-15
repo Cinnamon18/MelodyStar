@@ -26,11 +26,16 @@ namespace Cutscene {
 
 		private IEnumerator playCutscene(List<CutsceneElement> elements) {
 			foreach(CutsceneElement element in elements) {
-				yield return element.doAction(cutsceneVisuals, dialogManager, actors);
+				yield return element.doAction(this);
 			}
 
 			yield return null;
 			cutsceneDone();
+		}
+
+		// hehe hacks
+		public void startCoroutine(IEnumerator coroutine) {
+			StartCoroutine(coroutine);
 		}
 		
 		private void cutsceneDone() {
