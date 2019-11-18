@@ -16,15 +16,17 @@ namespace Cutscene {
 	public class CutsceneParser : MonoBehaviour {
 
 		public GameObject[] actors;
-		public NamedPrefabStruct[] backgroundNamedPrefabs;
+		public NamedSpriteStruct[] backgroundNamedPrefabs;
 		private Dictionary<string, GameObject> actorPrefabs = new Dictionary<string, GameObject>();
-		private Dictionary<string, GameObject> backgroundPrefabs;
+		private Dictionary<string, Sprite> backgroundPrefabs;
+
+		private bool firstBackgroundAssigned = false;
 
 		void Awake() {
 			foreach (GameObject actorPrefab in actors) {
 				actorPrefabs.Add(actorPrefab.GetComponent<Actor>().name, actorPrefab);
 			}
-			backgroundPrefabs = NamedPrefab.dictFromNamedPrefabs(backgroundNamedPrefabs);
+			backgroundPrefabs = NamedPrefab.dictFromNamedSprites(backgroundNamedPrefabs);
 		}
 
 		public List<CutsceneElement> parse(string cutsceneText) {
@@ -61,13 +63,19 @@ namespace Cutscene {
 				//Scene transition
 				if (tokens.Length == 2) {
 					string sceneName = tokens[1];
-					GameObject background = null;
+					Sprite background = null;
 					try {
 						background = backgroundPrefabs[sceneName];
 					} catch (KeyNotFoundException) {
 						throw new InvalidScreenplaySyntaxException("Unrecognized background", segment);
 					}
-					return new CutsceneTransition(background);
+
+					if (firstBackgroundAssigned) {
+						return new CutsceneTransition(background, false);
+					} else {
+						firstBackgroundAssigned = true;
+						return new CutsceneTransition(background, true);
+					}
 				} else {
 					throw new InvalidScreenplaySyntaxException("Invalid number of tokens for Scene Transition", segment);
 				}

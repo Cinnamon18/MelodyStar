@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using TMPro;
+
 public enum ElementSelectionMethod {
     RESIZE
 }
@@ -65,6 +67,9 @@ public class SplineScrollView : Spliny
             
             float t = scrollAmount + elemSpacingScaled * i;
             t = Mathf.Clamp(t, 0.0f, 1.0f);
+            if (t == .5f) {
+                element.GetComponentInChildren<TextMeshProUGUI>().text = "t: " + t;
+            }
             element.transform.position = Evaluate(t);
             i++;
         }
