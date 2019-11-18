@@ -40,6 +40,9 @@ public class Spliny : MonoBehaviour
         if (distanceAlongCurve == 1) {
             return splineNodes[splineNodes.Length-1].transform.position;
         }
+        if (distanceAlongCurve == .5f) {
+            distanceAlongCurve = .5f;
+        }
 
         for (int i = 0; i < splineNodes.Length - 1; i++) {
 

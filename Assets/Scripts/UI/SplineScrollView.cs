@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 using TMPro;
 
@@ -67,9 +68,8 @@ public class SplineScrollView : Spliny
             
             float t = scrollAmount + elemSpacingScaled * i;
             t = Mathf.Clamp(t, 0.0f, 1.0f);
-            if (t == .5f) {
-                element.GetComponentInChildren<TextMeshProUGUI>().text = "t: " + t;
-            }
+            //element.GetComponentInChildren<TextMeshProUGUI>().text = "t: " + t;
+            //}
             element.transform.position = Evaluate(t);
             i++;
         }
@@ -81,7 +81,7 @@ public class SplineScrollView : Spliny
         scrollAmount = Mathf.Clamp(scrollAmount, 0f, 1f);
     }
 
-    void ScrollSingleElem(int dir) {
+    public void ScrollSingleElem(int dir) {
         selectedElement -= dir;
 
         if (selectedElement < 0) {
@@ -104,7 +104,11 @@ public class SplineScrollView : Spliny
         } else {
             lastSelectedElem = elementsHolder.GetChild(selectedElement + 1);
         }
+
+        if (lastSelectedElem != null)
+            lastSelectedElem.GetComponent<Canvas>().sortingOrder = 0;
         selectedElem = elementsHolder.GetChild(selectedElement);
+        selectedElem.GetComponent<Canvas>().sortingOrder = 1;
 
         while (progress < 1) {
             progress += Time.deltaTime * speed;
