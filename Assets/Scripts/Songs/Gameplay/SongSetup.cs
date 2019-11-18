@@ -9,17 +9,11 @@ namespace Songs.Gameplay {
 		const string basePath = "Assets/Resources/";
 
 		public GameObject lanePrefab;
-
-		public static Song readSong(string file) {
-			string path = "Songs/" + file + "/";
-			List<SongNote> notes = MidiParser.readMidi(basePath + path + "notes.mid");
-			AudioClip songBackground = Resources.Load<AudioClip>(path + "background");
-		}
 		public Song readSong(string band, string file) {
 			string path = "Songs/" + band + "/" + file + "/";
-			List<SongNote> notes = MidiParser.readMidi(basePath + path + "player.mid");
-			AudioClip songBackground = Resources.Load<AudioClip>(path + "backing");
-			AudioClip hitNoise = Resources.Load<AudioClip>(path + "instrument");
+			List<SongNote> notes = MidiParser.readMidi(basePath + path + file + "_player.mid");
+			AudioClip songBackground = Resources.Load<AudioClip>(path + file + "_backing");
+			AudioClip hitNoise = Resources.Load<AudioClip>(path + file + "_instrument");
 
 			return new Song(notes, songBackground, hitNoise);
 		}

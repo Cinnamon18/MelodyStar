@@ -18,29 +18,19 @@ namespace Songs.Gameplay {
 		public List<Lane> lanes;
 		public float songStartTime;
 		public InputManager input;
-		
-		void Awake()
-		{
-			if (!InputSettings.initalized)
-			{
-				InputSettings.setToDefault();
-			}
-			song = SongSetup.readSong("HotCrossBunsLow");
-
 		public string bandName;
 		public string songName;
 
 		void Start() {
-			if (!InputSettings.initalized) {
+			if (!InputSettings.initalized)
+			{
 				InputSettings.setToDefault();
 			}
+			//bandName = "Test";
+			//songName = "HotCrossBunsLow";
 			song = songSetup.readSong(bandName, songName);
 
 			backgroundMusic.clip = song.backgroundTrack;
-
-		}
-
-		void Start() {
 			backgroundMusic.Play();
 			instrument.clip = song.instrumentSample;
 
@@ -74,6 +64,8 @@ namespace Songs.Gameplay {
 		public int score = 0;
 		[HideInInspector]
 		public int numCorrect = 0;
+		[HideInInspector]
+		public int highestCombo = 0;
 		private void senseKeyPresses() {
 			//sense which k_eys are pressed
 			foreach (int laneIdx in input.keysIndiciesPressedButton) {
@@ -103,6 +95,10 @@ namespace Songs.Gameplay {
 						numCorrect = 0;
 						numMiss++;
 					}
+					if (numCorrect > highestCombo)
+					{
+						highestCombo = numCorrect;
+					}
 				}
 
 				Destroy(lowestNote);
@@ -118,27 +114,6 @@ namespace Songs.Gameplay {
 			} else {
 				return 1;
 			}
-		}
-		
-		public int getPerfect()
-		{
-			return numPerfect;
-		}
-		public int getGood()
-		{
-			return numGood;
-		}
-		public int getMiss()
-		{
-			return numMiss;
-		}
-		public float getStartTime()
-		{
-			return songStartTime;
-		}
-		public int getScore()
-		{
-			return score;
 		}
 	}
 }
