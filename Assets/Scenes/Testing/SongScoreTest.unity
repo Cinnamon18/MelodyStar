@@ -314,6 +314,7 @@ MonoBehaviour:
   scoreText: {fileID: 402861049}
   messageText: {fileID: 1886939047}
   reminderText: {fileID: 576557865}
+  idol: {fileID: 0}
   songSetup: {fileID: 1416981623886133891}
   songManager: {fileID: 885731648}
   input: {fileID: 885731647}
@@ -573,7 +574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 236, y: 4}
+  m_AnchoredPosition: {x: 190, y: -12}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &944494213

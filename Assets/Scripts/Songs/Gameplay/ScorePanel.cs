@@ -17,7 +17,7 @@ public class ScorePanel : MonoBehaviour
 	public SongSetup songSetup;
     public SongManager songManager;
 	public InputManager input;
-	public bool go = true;
+	public bool go;
     // Start is called before the first frame update
     
 	void Awake()
@@ -29,19 +29,19 @@ public class ScorePanel : MonoBehaviour
     }
 	void Start()
     {
-
+		go = true;
     }
 
     // Update is called once per frame
     void Update()
-    {
+     {
 		if (songManager.song.songOver(Time.time - songManager.songStartTime) && go)
 		{
 			updateScore();
 			reminderText.text = "Press Any Key to Continue";
 			if (Input.anyKeyDown)
 			{
-				Debug.Log("Next Song");
+				Debug.Log("Next Scene");
 				StartCoroutine(Object.FindObjectOfType<GameLoopManager>().advance());
 				go = false;
 			}

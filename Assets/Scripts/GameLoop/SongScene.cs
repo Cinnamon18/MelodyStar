@@ -14,6 +14,6 @@ namespace GameLoop {
 			cutsceneManager.songName = sceneID;
 		}
 
-		public override string getSceneType() { return "SongScoreTest"; }
+		public override string getSceneType() { return "Song"; }
 	}
 }
