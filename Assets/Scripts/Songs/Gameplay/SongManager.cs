@@ -26,8 +26,6 @@ namespace Songs.Gameplay {
 			{
 				InputSettings.setToDefault();
 			}
-			//bandName = "Test";
-			//songName = "HotCrossBunsLow";
 			song = songSetup.readSong(bandName, songName);
 
 			backgroundMusic.clip = song.backgroundTrack;
