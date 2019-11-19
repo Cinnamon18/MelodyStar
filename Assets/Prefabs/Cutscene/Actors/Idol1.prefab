@@ -104,3 +104,4 @@ MonoBehaviour:
   actorName: Idol1
   image: {fileID: 7661204357361472358}
   position: 0
+  isDark: 0
