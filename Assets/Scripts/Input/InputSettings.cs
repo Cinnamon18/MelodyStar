@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using System;
+using System.Linq;
 using UnityEngine;
 
 namespace CustomInput {
@@ -29,6 +30,50 @@ namespace CustomInput {
 			InputSettings.inputMode = InputMode.MIDI;
 			InputSettings.middleC = defaultMiddleCMidi;
 			initalized = true;
+
+		}
+
+		public static void setToPrefs()
+		{
+			//TESTING
+			//Debug.Log("Keys: " + PlayerPrefs.GetString("keys"));
+			//Debug.Log("Input Mode: " + PlayerPrefs.GetInt("inputMode"));
+			//Debug.Log("Middle C: " + PlayerPrefs.GetInt("middleC"));
+			InputSettings.keys = parseKeysString(PlayerPrefs.GetString("keys"));
+			InputSettings.inputMode = (InputMode) PlayerPrefs.GetInt("inputMode");
+			InputSettings.middleC = PlayerPrefs.GetInt("middleC");
+		}
+
+		public static string getKeysString()
+		{
+			return getKeysString(keys);
+		}
+
+		public static string getKeysString(int[] keys)
+		{
+			return string.Join(",", keys);
+		}
+
+		public static int[] parseKeysString(string keysString)
+		{
+			string[] elements = keysString.Split(',');
+
+			int[] result = new int[elements.Length];
+			for (int i = 0; i < result.Length; i++)
+			{
+				try
+				{
+					result[i] = Int32.Parse(elements[i]);
+				} catch (Exception e)
+				{
+					Debug.LogWarning("Key Settings were not parsed successfully (ya done f'ed up).\n Using defaults instead.");
+					Debug.Log(e.StackTrace);
+
+					setToDefault();
+				}
+			}
+
+			return result;
 		}
 	}
 }

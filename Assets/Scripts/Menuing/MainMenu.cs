@@ -5,11 +5,16 @@ using GameLoop;
 
 namespace Menuing {
 	public class MainMenu : MonoBehaviour {
-
+    
 		public GameLoopManager gameLoopManager;
 
 		void Start() {
-			if (!InputSettings.initalized) {
+			if(PlayerPrefs.HasKey("saved"))
+			{
+				InputSettings.setToPrefs();
+			} 
+      else if (!InputSettings.initalized) 
+      {
 				InputSettings.setToDefault();
 			}
 		}
@@ -33,6 +38,5 @@ namespace Menuing {
 		public void quit() {
 			Application.Quit();
 		}
-
 	}
 }
