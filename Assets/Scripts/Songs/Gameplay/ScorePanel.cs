@@ -23,6 +23,7 @@ public class ScorePanel : MonoBehaviour
     public SongManager songManager;
 	public InputManager input;
 	public bool go;
+	public bool goScore;
     // Start is called before the first frame update
     
 	void Awake()
@@ -31,11 +32,13 @@ public class ScorePanel : MonoBehaviour
         {
             InputSettings.setToDefault();
         }
+		reminderText.text = "Hello";
 		Panel.SetActive(false);
 	}
 	void Start()
     {
 		go = true;
+		goScore = true;
 	}
 
     // Update is called once per frame
@@ -43,8 +46,12 @@ public class ScorePanel : MonoBehaviour
      {
 		if (songManager.song.songOver(Time.time - songManager.songStartTime) && go)
 		{
-			updateScore();
-			reminderText.text = "Press Any Key to Continue";
+			if(goScore)
+			{
+				updateScore();
+				StartCoroutine(BlinkText());
+				goScore = false;
+			}
 			if (Input.anyKeyDown)
 			{
 				Debug.Log("Next Scene");
@@ -56,6 +63,7 @@ public class ScorePanel : MonoBehaviour
     public void updateScore()
     {
 		Panel.SetActive(true);
+		reminderText.text = "Press Any Key to Continue";
 		messageText.text = "Good Job!";
 		scoreText.text = "\nScore: " + songManager.score + "\nPerfect: " + songManager.numPerfect + "\n" +
 				"Good: " + songManager.numGood + "\n" +
@@ -72,6 +80,23 @@ public class ScorePanel : MonoBehaviour
 		} else if (songManager.bandName.Equals("Frog"))
 		{
 			CharacterImage.sprite = Frog;
+		} else
+		{
+			CharacterImage.sprite = Idol;
+		}
+	}
+	public IEnumerator BlinkText()
+	{
+		//blink it forever. You can set a terminating condition depending upon your requirement
+		while (1 > 0)
+		{
+			//set the Text's text to blank
+			reminderText.text = "";
+			//display blank text for 0.5 seconds
+			yield return new WaitForSeconds(.5f);
+			//display “I AM FLASHING TEXT” for the next 0.5 seconds
+			reminderText.text = "Press Any Key to Continue";
+			yield return new WaitForSeconds(.5f);
 		}
 	}
 }
