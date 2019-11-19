@@ -9,11 +9,16 @@ using GameLoop;
 
 public class ScorePanel : MonoBehaviour
 {
+	public GameObject Panel;
     public Text scoreText;
 	public Text messageText;
 	public Text reminderText;
 	public Song song;
-	public Sprite idol;
+	public Sprite Idol;
+	public Sprite Rock;
+	public Sprite Chiptune;
+	public Sprite Frog;
+	public Image CharacterImage;
 	public SongSetup songSetup;
     public SongManager songManager;
 	public InputManager input;
@@ -26,11 +31,12 @@ public class ScorePanel : MonoBehaviour
         {
             InputSettings.setToDefault();
         }
-    }
+		Panel.SetActive(false);
+	}
 	void Start()
     {
 		go = true;
-    }
+	}
 
     // Update is called once per frame
     void Update()
@@ -49,10 +55,23 @@ public class ScorePanel : MonoBehaviour
     }
     public void updateScore()
     {
+		Panel.SetActive(true);
 		messageText.text = "Good Job!";
 		scoreText.text = "\nScore: " + songManager.score + "\nPerfect: " + songManager.numPerfect + "\n" +
 				"Good: " + songManager.numGood + "\n" +
 				"Miss: " + songManager.numMiss + "\nHighest Combo : "
 					+ songManager.highestCombo;
+		if (songManager.bandName.Equals("JPop")) {
+			CharacterImage.sprite = Idol;
+		} else if (songManager.bandName.Equals("Metal"))
+		{
+			CharacterImage.sprite = Rock;
+		} else if (songManager.bandName.Equals("Chiptune"))
+		{
+			CharacterImage.sprite = Chiptune;
+		} else if (songManager.bandName.Equals("Frog"))
+		{
+			CharacterImage.sprite = Frog;
+		}
 	}
 }
