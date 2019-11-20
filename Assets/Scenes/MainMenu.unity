@@ -476,15 +476,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 988738603}
-        m_MethodName: freePlay
-        m_Mode: 1
+      - m_Target: {fileID: 3896917871123887441}
+        m_MethodName: GoToScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: SongSelect
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -783,31 +783,13 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106883769}
   m_CullTransparentMesh: 0
---- !u!1 &1227164388 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3896917872312647604, guid: 85da74ecdd84d4e4ea2168d59141c257,
-    type: 3}
-  m_PrefabInstance: {fileID: 3896917871123887440}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1227164389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227164388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dee1228d8d886c48a8812ba5e420a92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1227164390 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3896917872312647606, guid: 85da74ecdd84d4e4ea2168d59141c257,
     type: 3}
   m_PrefabInstance: {fileID: 3896917871123887440}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227164388}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 768e36ab5a2e5f541945b16d25d3b37b, type: 3}
@@ -1648,6 +1630,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85da74ecdd84d4e4ea2168d59141c257, type: 3}
+--- !u!114 &3896917871123887441 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3896917872312647605, guid: 85da74ecdd84d4e4ea2168d59141c257,
+    type: 3}
+  m_PrefabInstance: {fileID: 3896917871123887440}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b1d5743dca8aa469d4ece6ad24c7de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4841322929544408099
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -64,4 +64,8 @@ public class SceneTransition : MonoBehaviour {
 		}
 		perStep(1);
 	}
+
+	public void GoToScene(string sceneName) {
+		StartCoroutine(LoadScene(sceneName));
+	}
 }
