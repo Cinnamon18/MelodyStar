@@ -15,10 +15,7 @@ namespace Songs.Gameplay {
 		private float width;
 		private Queue<LaneNote> notes = new Queue<LaneNote>();
 
-
-
 		void Start() {
-
 			width = gameObject.GetComponent<SpriteRenderer>().size.x;
 
 			noteTarget = Instantiate(noteTargetPrefab, this.transform.position + new Vector3(0, -9), noteTargetPrefab.transform.rotation);

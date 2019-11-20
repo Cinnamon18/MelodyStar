@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Songs.Gameplay {
 	public class LaneNote : MonoBehaviour {
-		const float fallSpeed = 4; //Should be units per second, where the screen is 10 units tall
+		const float fallSpeed = 8; //Should be units per second, where the screen is 10 units tall
 		const float rotateSpeed = 50;
 		const float spriteHeight = 8; // Manually encode height of the sprite
 		const float holdNoteCutoff = 0.200f; // Ms to qualify a note as a hold note (rather than a press once)
@@ -20,7 +20,7 @@ namespace Songs.Gameplay {
 
 		void Update() {
 			this.transform.position += new Vector3(0, -fallSpeed) * Time.deltaTime;
-			bottomCircle.transform.Rotate(new Vector3(0, 0, rotateSpeed) * Time.deltaTime);
+			// bottomCircle.transform.Rotate(new Vector3(0, 0, rotateSpeed) * Time.deltaTime);
 			if (topCircle != null) {
 				// topCircle.transform.Rotate(new Vector3(0, 0, rotateSpeed) * Time.deltaTime);
 			}

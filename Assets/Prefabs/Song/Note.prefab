@@ -68,7 +68,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 7e0aa0dea3a232944a3b57d19120a173, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -129,6 +129,8 @@ MonoBehaviour:
   bottomCircle: {fileID: 6975559322576785649}
   noteConnector: {fileID: 355513347828134910}
   topCircle: {fileID: 1595170356339387034}
+  isHoldNote: 1
+  isBeingPressed: 0
 --- !u!1001 &4204523316000663967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -195,6 +197,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623399257211962290, guid: 70a99a83e35ffcc4e98fa19af74ee8d9,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70a99a83e35ffcc4e98fa19af74ee8d9, type: 3}
