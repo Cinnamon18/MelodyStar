@@ -12,10 +12,11 @@ namespace GameLoop {
 			if (GameLoopManager.gameLoop == null) {
 				GameLoopManager.gameLoop = new GameLoop(
 					new List<GameScene>() {
+						new CutsceneScene("Test", "CenterTest"),
 						new CutsceneScene("Test", "DemoShortScene1"),
-						new CutsceneScene("Test", "DemoShortScene2"),
-						new SongScene("Metal", "story_by_brad_baker"),
 						new CutsceneScene("Test", "DemoShortScene3"),
+						new SongScene("Metal", "story_by_brad_baker"),
+						new CutsceneScene("Test", "DemoShortScene2"),
 						new SongScene("Chiptune", "battle_mode"),
 					}
 				);

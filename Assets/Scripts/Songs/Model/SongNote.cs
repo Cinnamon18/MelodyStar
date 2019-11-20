@@ -13,7 +13,8 @@ namespace Songs.Model {
 		public int key;
 		//Times are in whole seconds
 		public float startTime, endTime;
-		public bool created, pressed;
+		public bool created;
+		public float difficulty;
 
 		public SongNote(NoteName letter, int key) :
 			this(letter, key, 0, 1) { }
@@ -22,7 +23,7 @@ namespace Songs.Model {
 			this.letter = letter;
 			this.key = key;
 			this.startTime = startTime;
-			this.endTime = endTime;
+			this.endTime = endTime; 			
 		}
 
 		public int toIndex() {

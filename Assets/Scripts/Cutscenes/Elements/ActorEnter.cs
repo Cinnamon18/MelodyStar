@@ -11,6 +11,11 @@ namespace Cutscene.Elements {
 		public GameObject actorPrefab { get; }
 		public CutscenePosition position { get; }
 		private string actorName;
+		private static Dictionary <CutscenePosition, Vector2> positions = new Dictionary<CutscenePosition, Vector2> {
+			{CutscenePosition.Left, new Vector2(-450, 475)},
+			{CutscenePosition.Center, new Vector2(0, 475)},
+			{CutscenePosition.Right, new Vector2(450, 475)}
+		};
 
 		public ActorEnter(string actorName, GameObject actorPrefab, CutscenePosition position) {
 			this.actorPrefab = actorPrefab;
@@ -18,19 +23,21 @@ namespace Cutscene.Elements {
 			this.actorName = actorName;
 		}
 
-		public override IEnumerator doAction(
-			CutsceneVisualsManager cutsceneVisuals,
-			DialogManager dialogManager,
-			Dictionary<string, Actor> actors) {
+		public override IEnumerator doAction(CutsceneManager cutsceneManager) {
 
-			GameObject actorGO = Object.Instantiate(actorPrefab, cutsceneVisuals.canvas.transform);
+			GameObject actorGO = Object.Instantiate(actorPrefab, cutsceneManager.cutsceneVisuals.canvas.transform);
+			
 
 			Actor actor = actorGO.GetComponent<Actor>();
 			actor.position = position;
-			actors.Add(actor.actorName, actor);
+			actorGO.GetComponent<RectTransform>().anchoredPosition = ActorEnter.positions[actor.position];
+			actorGO.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0);
+			actorGO.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0);
+			actorGO.transform.SetSiblingIndex(2);
+			cutsceneManager.actors.Add(actor.actorName, actor);
 
-			yield return cutsceneVisuals.addActor(actor, position);
-			yield return dialogManager.addActor(actor);
+			yield return cutsceneManager.cutsceneVisuals.addActor(actor, position);
+			yield return cutsceneManager.dialogManager.addActor(actor);
 			yield return actor.fadeIn();
 		}
 
