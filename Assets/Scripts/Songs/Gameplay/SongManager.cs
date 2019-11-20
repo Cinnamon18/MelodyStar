@@ -27,8 +27,8 @@ namespace Songs.Gameplay {
 		[HideInInspector]
 		public int combo = 0;
 
-		public string bandName;
-		public string songName;
+		public string bandName = "Test";
+		public string songName = "HotCrossBunsLow";
 
 
 		void Start() {
