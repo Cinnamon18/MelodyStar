@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Songs.Model;
 using UnityEngine;
 
 namespace Songs.Gameplay {
@@ -15,6 +16,8 @@ namespace Songs.Gameplay {
 		public bool isHoldNote = true;
 		public bool isBeingPressed = false;
 
+		public SongNote songNote;
+
 		void Start() {
 		}
 
@@ -26,7 +29,9 @@ namespace Songs.Gameplay {
 			}
 		}
 
-		public void setNoteWidth(float time) {
+		public void setNoteWidth() {
+			float time = songNote.endTime - songNote.startTime;
+
 			if (time < holdNoteCutoff) {
 				Destroy(topCircle);
 				Destroy(noteConnector);

@@ -19,6 +19,7 @@ namespace Menuing {
 		}
 
 		public void story() {
+			GameLoopManager.gameLoop = GameLoopManager.defaultGameLoop;
 			StartCoroutine(gameLoopManager.advance());
 		}
 

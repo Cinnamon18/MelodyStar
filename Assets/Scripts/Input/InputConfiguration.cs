@@ -15,7 +15,6 @@ namespace CustomInput {
 			//Just for testing
 			// InputSettings.setToDefault();
 			//InputSettings.setToDefaultMidi();
-
 			if (InputSettings.inputMode == InputMode.Keyboard) {
 				setInputModeKeyboard();
 			} else if (InputSettings.inputMode == InputMode.MIDI) {

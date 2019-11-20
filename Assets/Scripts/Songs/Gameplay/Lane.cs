@@ -14,6 +14,7 @@ namespace Songs.Gameplay {
 		public GameObject noteTarget;
 		private float width;
 		private Queue<LaneNote> notes = new Queue<LaneNote>();
+		public SongNote myPitch;
 
 		void Start() {
 			width = gameObject.GetComponent<SpriteRenderer>().size.x;
@@ -25,14 +26,19 @@ namespace Songs.Gameplay {
 		public void createNote(SongNote songNote) {
 			GameObject noteGO = Instantiate(notePrefab, this.transform.position, notePrefab.transform.rotation);
 			LaneNote laneNote = noteGO.GetComponent<LaneNote>();
+			laneNote.songNote = songNote;
 			laneNote.setSpriteSizes(new Vector2(width * 0.9f, width * 0.9f));
-			laneNote.setNoteWidth(songNote.endTime - songNote.startTime);
+			laneNote.setNoteWidth();
 			notes.Enqueue(laneNote);
 		}
 
 		public LaneNote getLowestNote() {
 			if (notes.Count > 0) {
 				LaneNote note = notes.Peek();
+				if(note.transform.position.y < -6) {
+					destroyLowestNote();
+					return getLowestNote();
+				}
 				return note;
 			} else {
 				return null;
@@ -60,7 +66,6 @@ namespace Songs.Gameplay {
 				case PressAccuracy.Miss:
 					Instantiate(missEffect, noteTarget.transform.position, missEffect.transform.rotation);
 					break;
-
 			}
 		}
 	}

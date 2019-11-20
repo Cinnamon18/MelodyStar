@@ -23,6 +23,7 @@ public class MIDIExample : MonoBehaviour {
         midiSys = new Middleware();
 
         midiSys.SetGain(0.2f);
+        midiSys.PlayNote(0, 40, 1);
         
         var sfont = midiSys.LoadSoundFont(streamingSoundFontPath);
 

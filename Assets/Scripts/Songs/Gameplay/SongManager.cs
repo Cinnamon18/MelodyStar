@@ -4,6 +4,7 @@ using Songs.Model;
 using UnityEngine;
 using Melanchall.DryWetMidi.MusicTheory;
 using Songs.Gameplay;
+using FluidSynth;
 
 namespace Songs.Gameplay {
 	public class SongManager : MonoBehaviour {
@@ -11,13 +12,18 @@ namespace Songs.Gameplay {
 		public Song song;
 		public SongSetup songSetup;
 		public AudioSource backgroundMusic;
-		public AudioSource instrument;
-		public int numPerfect;
-		public int numGood;
-		public int numMiss;
 		public List<Lane> lanes;
 		public float songStartTime;
 		public InputManager input;
+
+		private MiddlewareAPI midiSys;
+
+		[HideInInspector]
+		public int numPerfect;
+		[HideInInspector]
+		public int numGood;
+		[HideInInspector]
+		public int numMiss;
 		[HideInInspector]
 		public int score = 0;
 		[HideInInspector]
@@ -30,20 +36,23 @@ namespace Songs.Gameplay {
 		public string bandName = "Test";
 		public string songName = "HotCrossBunsLow";
 
+		void Awake() {
+			midiSys = new Middleware(hotplugMIDI: false);
+			midiSys.SetGain(1f);
+			var sfont = midiSys.LoadSoundFont("soundfonts/*.sf2");
+			midiSys.SetChannelInstrument(0, sfont, 0, 0);
+		}
 
 		void Start() {
-			if (!InputSettings.initalized)
-			{
+			if (!InputSettings.initalized) {
 				InputSettings.setToDefault();
 			}
 			song = songSetup.readSong(bandName, songName);
 
 			backgroundMusic.clip = song.backgroundTrack;
 			backgroundMusic.Play();
-			instrument.clip = song.instrumentSample;
 
-
-			lanes = songSetup.setupLanes();
+			lanes = songSetup.setupLanes(song);
 			songStartTime = Time.time;
 		}
 
@@ -73,8 +82,8 @@ namespace Songs.Gameplay {
 			foreach (int laneIdx in input.keysIndiciesPressedButton) {
 				Lane lane = lanes[laneIdx];
 				lane.makePressVFx();
-				instrument.Play();
 				LaneNote lowestNote = lane.getLowestNote();
+				midiSys.PlayNote(0, lane.myPitch.toIndex(), 127);
 
 				if (lowestNote != null) {
 					if (lowestNote.isHoldNote) {
@@ -89,8 +98,8 @@ namespace Songs.Gameplay {
 			foreach (int laneIdx in input.keysIndiciesReleasedButton) {
 				Lane lane = lanes[laneIdx];
 				lane.makePressVFx();
-				instrument.Play();
 				LaneNote lowestNote = lane.getLowestNote();
+				midiSys.StopNote(0, lane.myPitch.toIndex());
 
 				if (lowestNote != null) {
 					if (lowestNote.isHoldNote && lowestNote.isBeingPressed) {
@@ -111,7 +120,7 @@ namespace Songs.Gameplay {
 				score += 100 * scoreMult;
 				numPerfect++;
 				combo++;
-				if(combo > highestCombo) {
+				if (combo > highestCombo) {
 					highestCombo = combo;
 				}
 				return numCorrect + 1;
@@ -120,7 +129,7 @@ namespace Songs.Gameplay {
 				score += 75 * scoreMult;
 				numGood++;
 				combo++;
-				if(combo > highestCombo) {
+				if (combo > highestCombo) {
 					highestCombo = combo;
 				}
 				return numCorrect + 1;
@@ -128,7 +137,7 @@ namespace Songs.Gameplay {
 				lane.noteTapVFx(PressAccuracy.Miss);
 				scoreMult = 0;
 				numMiss++;
-				if(combo > highestCombo) {
+				if (combo > highestCombo) {
 					highestCombo = combo;
 				}
 				combo = 0;

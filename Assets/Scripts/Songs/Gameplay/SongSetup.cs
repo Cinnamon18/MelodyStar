@@ -5,10 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections;
+using Melanchall.DryWetMidi.MusicTheory;
+
 namespace Songs.Gameplay {
 	public class SongSetup : MonoBehaviour {
 
-		const string basePath = "Assets/Resources/";
+		private static string basePath = Application.streamingAssetsPath;
 
 		public GameObject lanePrefab;
 		public Song readSong(string band, string file) {
@@ -42,7 +44,7 @@ namespace Songs.Gameplay {
 
 
 		}
-		public List<Lane> setupLanes() {
+		public List<Lane> setupLanes(Song song) {
 			List<Lane> lanes = new List<Lane>();
 
 			//coooooordinate transforms. but undisciplined.
@@ -60,6 +62,7 @@ namespace Songs.Gameplay {
 				GameObject lane = Instantiate(lanePrefab, startingPoint + horizontalOffset, lanePrefab.transform.rotation);
 				lane.GetComponent<SpriteRenderer>().size = new Vector2(laneWidth, 10);
 				lanes.Add(lane.GetComponent<Lane>());
+				lane.GetComponent<Lane>().myPitch = SongNote.noteFromIndex(i - InputSettings.middleC + new SongNote(NoteName.C, 4).toIndex());
 			}
 
 			string[] notes = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
@@ -74,14 +77,6 @@ namespace Songs.Gameplay {
 				}
 				index += 1;
 			}
-			/* 	try{
-					noteText.text = notes[index];
-				}
-				catch (ArgumentOutOfRangeException){
-					Debug.Log(index);
-				} */
-			//noteText.text = notes[index];
-			//index+=1;
 
 			if (InputSettings.middleC > 0) {
 				int count = 0;
@@ -101,10 +96,6 @@ namespace Songs.Gameplay {
 
 			return lanes;
 		}
-		/* Lane firstLane = lanes[0];
-		Text firstText = firstLane.GetComponentInChildren<Text>();
-		firstText.text = "test";
-	 */
 
 	}
 }

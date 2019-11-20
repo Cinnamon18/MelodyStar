@@ -42,6 +42,7 @@ namespace CustomInput {
 			InputSettings.keys = parseKeysString(PlayerPrefs.GetString("keys"));
 			InputSettings.inputMode = (InputMode) PlayerPrefs.GetInt("inputMode");
 			InputSettings.middleC = PlayerPrefs.GetInt("middleC");
+			initalized = true;
 		}
 
 		public static string getKeysString()
