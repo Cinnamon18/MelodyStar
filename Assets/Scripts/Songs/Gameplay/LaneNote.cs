@@ -38,7 +38,7 @@ namespace Songs.Gameplay {
 				float stretchFactor = (time * fallSpeed);
 				print(stretchFactor);
 				noteConnector.GetComponent<SpriteRenderer>().size = new Vector2(size.x, stretchFactor);
-				// topCircle.transform.position = noteConnector.transform.position + new Vector3(0, position, 0);
+				topCircle.transform.position = noteConnector.transform.position + new Vector3(0, stretchFactor, 0);
 			}
 		}
 
