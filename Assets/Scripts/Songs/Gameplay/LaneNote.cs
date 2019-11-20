@@ -7,7 +7,7 @@ namespace Songs.Gameplay {
 		const float fallSpeed = 8; //Should be units per second, where the screen is 10 units tall
 		const float rotateSpeed = 50;
 		const float spriteHeight = 8; // Manually encode height of the sprite
-		const float holdNoteCutoff = 0.200f; // Ms to qualify a note as a hold note (rather than a press once)
+		const float holdNoteCutoff = 0.500f; // Ms to qualify a note as a hold note (rather than a press once)
 
 		public GameObject bottomCircle;
 		public GameObject noteConnector;
@@ -33,10 +33,7 @@ namespace Songs.Gameplay {
 				isHoldNote = false;
 			} else {
 				Vector2 size = noteConnector.GetComponent<SpriteRenderer>().size;
-				print(time);
-				print(size);
 				float stretchFactor = (time * fallSpeed);
-				print(stretchFactor);
 				noteConnector.GetComponent<SpriteRenderer>().size = new Vector2(size.x, stretchFactor);
 				topCircle.transform.position = noteConnector.transform.position + new Vector3(0, stretchFactor, 0);
 			}
