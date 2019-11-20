@@ -1,0 +1,104 @@
+Scene: StreetNight
+
+Laundry
+(Was it behind the warehouse? I remember there was a bus stop near it…)
+(Where was it? I really need to do this laundry.)
+
+Narrator
+The “empty” warehouse is alive with light. Earsplitting music thumps from across the street.
+
+Laundry
+(Wow.)
+(I love doing laundry.)
+
+Narrator
+As you walk closer to the “empty” warehouse, you can start to make out some intense lyrics. 
+“...EMPIRE OF FLESH…”
+“...A BED OF ROTTING MISERY…”
+“...GODLESS CHEETOS…”
+
+Laundry
+(...)
+(Ah! This must be the laundromat.)
+
+Scene: Landromat
+
+Narrator
+You walk into the warehouse, and a wave of pure sound erupts in your face. Three figures thrash: one screams, one riffs, and one is ripping apart a drumset.
+This might not be the laundromat.
+
+Enter left: Axe
+
+Axe
+THE EMPIRE OF FLESH! THE EMPIRE OF FLESH! 
+THE EMPIRE OF FLESH... IS NOT VEGETARIAN! 
+
+Laundry
+E...excuse me, is this the laundromat?
+
+Axe
+THE EMPIRE OF—
+Wait, who is that?
+
+Enter center: Roxie
+
+Roxie (wild)
+They’re about to be luncheon meat! Hey, Axe—hold my guitar. 
+
+Luncheon Meat
+I’m...I’m just looking for...
+
+Axe
+Roxie, please. You don’t even like luncheon meat. 
+Sorry... about her. It’s a pleasure to meet you. I’m Axe Pecorino.
+Are you lost?
+
+Laundry
+No, I’m Laundry. Is this the laundromat?
+
+Roxie
+…
+
+Axe
+It is, actually. There are washing machines under the speakers over there.
+
+Roxie
+Washers number 1 and 2 don’t work anymore because Frey used them as snare drums. Smashed them up real good.
+
+Enter right: Frey
+
+Frey
+No, they were broken when we got here. 
+
+Axe
+This is true. 
+Feel free to use the machines. We’ll head out pretty soon.
+
+Laundry
+[Nods]
+
+Axe
+Where...where’s your laundry?
+
+Narrator
+You look back at the heavy metal trio, a slight smile on your face.
+
+Laundry
+I am my laundry.
+
+Narrator
+You climb into washing machine number 5 and shut the door. 
+
+// The entire screen begins to spin, slowly at first.
+
+Roxie
+[Muffled] What
+
+Frey
+[Muffled] We…
+[Muffled] We need them to join our band. 
+
+Axe
+[Muffled] No,
+
+// End scene.

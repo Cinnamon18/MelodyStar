@@ -135,7 +135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &416892847
 Transform:
   m_ObjectHideFlags: 0
@@ -457,34 +457,40 @@ PrefabInstance:
       propertyPath: input
       value: 
       objectReference: {fileID: 784681390}
-    - target: {fileID: 4706058807149926327, guid: afb588c84c9351544b06996b009a8852,
+    - target: {fileID: 4706058807090593591, guid: afb588c84c9351544b06996b009a8852,
         type: 3}
-      propertyPath: Frog
-      value: 
-      objectReference: {fileID: 21300000, guid: 5742c0dad1661974d8d97185ea143be5,
-        type: 3}
-    - target: {fileID: 4706058807149926327, guid: afb588c84c9351544b06996b009a8852,
-        type: 3}
-      propertyPath: Chiptune
-      value: 
-      objectReference: {fileID: 21300000, guid: f6c61196ab1501540a6ea00559b90da7,
-        type: 3}
-    - target: {fileID: 4706058807149926327, guid: afb588c84c9351544b06996b009a8852,
-        type: 3}
-      propertyPath: Idol
-      value: 
-      objectReference: {fileID: 21300000, guid: bece6a600e1edc747a2b3cf4a06a8dac,
-        type: 3}
-    - target: {fileID: 4706058807149926327, guid: afb588c84c9351544b06996b009a8852,
-        type: 3}
-      propertyPath: Rock
-      value: 
-      objectReference: {fileID: 21300000, guid: 1b0bd8d6e1d705c41923f6e57a0993c7,
-        type: 3}
-    - target: {fileID: 4706058807733819118, guid: afb588c84c9351544b06996b009a8852,
+      propertyPath: m_AnchoredPosition.x
+      value: 10.900024
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706058807090593591, guid: afb588c84c9351544b06996b009a8852,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -13.9999695
+      value: -5.299988
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706058807090593591, guid: afb588c84c9351544b06996b009a8852,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 253
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706058807090593591, guid: afb588c84c9351544b06996b009a8852,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 123.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706058806907972375, guid: afb588c84c9351544b06996b009a8852,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8537736
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706058806907972375, guid: afb588c84c9351544b06996b009a8852,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.9908608
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706058806907972375, guid: afb588c84c9351544b06996b009a8852,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afb588c84c9351544b06996b009a8852, type: 3}
@@ -900,26 +906,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SongManager
       objectReference: {fileID: 0}
-    - target: {fileID: 1998456349047679093, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
-        type: 3}
-      propertyPath: audio
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998456349047679093, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
-        type: 3}
-      propertyPath: backgroundMusic
-      value: 
-      objectReference: {fileID: 1850394270}
-    - target: {fileID: 1998456349047679093, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
-        type: 3}
-      propertyPath: instrument
-      value: 
-      objectReference: {fileID: 1870388496}
-    - target: {fileID: 1998456349047679093, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
-        type: 3}
-      propertyPath: songSetup
-      value: 
-      objectReference: {fileID: 1416981623886133891}
     - target: {fileID: 1416981625138717275, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -975,6 +961,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1998456349047679093, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
+        type: 3}
+      propertyPath: audio
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998456349047679093, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
+        type: 3}
+      propertyPath: backgroundMusic
+      value: 
+      objectReference: {fileID: 1850394270}
+    - target: {fileID: 1998456349047679093, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
+        type: 3}
+      propertyPath: instrument
+      value: 
+      objectReference: {fileID: 1870388496}
+    - target: {fileID: 1998456349047679093, guid: efc2cb983dc2c0f4a92fcad6ad4ace06,
+        type: 3}
+      propertyPath: songSetup
+      value: 
+      objectReference: {fileID: 1416981623886133891}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efc2cb983dc2c0f4a92fcad6ad4ace06, type: 3}
 --- !u!114 &1416981623886133891 stripped

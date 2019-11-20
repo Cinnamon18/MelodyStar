@@ -33,12 +33,12 @@ namespace Songs.Gameplay {
 				isHoldNote = false;
 			} else {
 				Vector2 size = noteConnector.GetComponent<SpriteRenderer>().size;
-				float stretchFactor = (time / fallSpeed) * size.y;
-				float position = stretchFactor;
-				size = new Vector2(size.x, stretchFactor);
-				// noteConnector.transform.localScale = noteConnector.transform.localScale + new Vector3(0, stretchFactor, 0);
-				noteConnector.transform.localPosition = noteConnector.transform.localPosition + new Vector3(0, position * -1f, 0);
-				topCircle.transform.position = noteConnector.transform.position + new Vector3(0, position, 0);
+				print(time);
+				print(size);
+				float stretchFactor = (time * fallSpeed);
+				print(stretchFactor);
+				noteConnector.GetComponent<SpriteRenderer>().size = new Vector2(size.x, stretchFactor);
+				// topCircle.transform.position = noteConnector.transform.position + new Vector3(0, position, 0);
 			}
 		}
 

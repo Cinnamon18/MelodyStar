@@ -23,7 +23,7 @@ namespace Songs.Model {
 			this.letter = letter;
 			this.key = key;
 			this.startTime = startTime;
-			this.endTime = endTime; 			
+			this.endTime = endTime;
 		}
 
 		public int toIndex() {

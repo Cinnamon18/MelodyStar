@@ -29,7 +29,6 @@ namespace Cutscene {
 				yield return element.doAction(this);
 			}
 
-			yield return null;
 			cutsceneDone();
 		}
 

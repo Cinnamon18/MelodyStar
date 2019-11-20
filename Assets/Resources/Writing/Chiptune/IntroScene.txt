@@ -1,0 +1,70 @@
+Scene: PracticeRoom
+
+//Introduction to the bandmembers and the main conflict. First meeting with the main character
+
+Enter center: Strummer
+
+Enter right: Ann
+
+Enter left: Jett
+
+Laundry
+Man, I’m glad to sit down and have a bite to eat. I hope this group coming in doesn’t prove to be something awful.
+
+Strummer
+Hey, right now we need to find a new keyboardist. We can point fingers later.
+
+Ann
+And how are we supposed to play like this again?
+
+Strummer
+By playing.
+
+Jett
+You’re the one bringing up all the issues.
+
+Ann
+Just because you’ve locked up all your emotions doesn’t mean they’re not there.
+
+Jett
+You’re one to talk. You wouldn’t know what locking your emotions up looked like if it hit you with a truck.
+
+Ann
+And you wouldn’t know what intimacy looked like if it bit you on the ass.
+
+Strummer
+Really, Ann, are you seriously making this about virginity? What are you, a teenage boy?
+
+Jett (Amused)
+You know she is.
+
+Ann
+Hey!
+
+Strummer (Amused)
+Enough with the ribbing already. Look, we’re weirding out this poor person out.
+
+Laundry
+You’re honestly pretty funny. Hey, did I hear you say that you were looking for a keyboardist?
+
+Strummer
+Yes-
+
+Ann
+No.
+
+Strummer
+Yes, we are.
+Would you be down to play a handful of gigs?
+
+Jett
+Around, like, 10
+
+Ann
+More like 2
+
+Strummer
+Actually, we’re booked for about 4 or 5 coming up. If you can put up with the rest of the band, that is.
+
+Laundry
+Sounds good to me.

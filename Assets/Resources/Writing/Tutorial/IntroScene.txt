@@ -1,0 +1,34 @@
+Scene: Bar
+
+//Introduction to the game
+
+Laundry
+GODS it’s been a long day. I don’t even have a mattress to sleep on. At least all of my boxes made it in the apartment.
+
+Laundry
+This menu has some interesting items, better than what I expected for a bar.
+
+Narrator
+You take a look around the bar. It’s late in the evening and while not raucous, the bar is noisy. The atmosphere looked good from the street, that and the great smell wafting from the propped door convinced you to try it. A stage in the far corner of the room catches your eye.
+
+Bartender
+What can I get you?
+
+Laundry
+I’ll have….. I’ll have…. Sorry, is there ever live music here?
+
+Bartender
+Weekends, mostly. Recently there’s been a lot of new groups around. Big competition later this month.
+
+Laundry
+Good to know, I’ll stop back later this week.
+
+Narrator
+You make a mental note to come back and see if any groups look interesting. Maybe if you’re lucky one will need a keyboardist. The food is good as the smell promised. After the meal you head back to your barren apartment.
+
+Scene: Apartment
+
+Laundry 
+Looks like I’m gonna be getting cozy on the floor tonight. All I want to do is sleep, but I should really practice piano before I sleep.
+
+// go to tutorial from here!

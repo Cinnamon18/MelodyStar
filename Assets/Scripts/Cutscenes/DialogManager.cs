@@ -16,7 +16,15 @@ namespace Cutscene {
 		public IEnumerator sayText(string actorName, string text) {
 			actorNameLabel.text = actorName;
 			dialog.text = text;
-			yield return new WaitForSeconds(1 + text.Length * 0.05f);
+			float startTime = Time.time;
+			float duration = 1 + text.Length * 0.05f;
+			yield return new WaitForSeconds(0.25f);
+			while(Time.time - startTime < duration) {
+				if(Input.anyKey) {
+					break;
+				}
+				yield return null;
+			}
 		}
 
 		public IEnumerator addActor(Actor actor) {

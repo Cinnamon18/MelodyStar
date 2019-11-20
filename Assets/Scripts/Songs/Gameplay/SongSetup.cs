@@ -33,7 +33,6 @@ namespace Songs.Gameplay {
 			}
 			float average = sum / output.Length;
 			int difficulty = Convert.ToInt32(-6 * (Math.Log(average, 10)) + 4.1);
-			Debug.Log(difficulty);
 			if (difficulty <= 0) {
 				difficulty = 1;
 			} else if (difficulty > 10) {

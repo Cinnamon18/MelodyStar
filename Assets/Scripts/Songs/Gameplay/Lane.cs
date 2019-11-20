@@ -25,8 +25,8 @@ namespace Songs.Gameplay {
 		public void createNote(SongNote songNote) {
 			GameObject noteGO = Instantiate(notePrefab, this.transform.position, notePrefab.transform.rotation);
 			LaneNote laneNote = noteGO.GetComponent<LaneNote>();
-			laneNote.setNoteWidth(songNote.endTime - songNote.startTime);
 			laneNote.setSpriteSizes(new Vector2(width * 0.9f, width * 0.9f));
+			laneNote.setNoteWidth(songNote.endTime - songNote.startTime);
 			notes.Enqueue(laneNote);
 		}
 

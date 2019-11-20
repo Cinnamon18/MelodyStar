@@ -5,21 +5,12 @@ using UnityEngine.SceneManagement;
 
 namespace GameLoop {
 	public class GameLoopManager : MonoBehaviour {
-		public static GameLoop gameLoop;
+		public static GameLoopScenes gameLoop;
 		public SceneTransition sceneTransition;
 
 		void Start() {
 			if (GameLoopManager.gameLoop == null) {
-				GameLoopManager.gameLoop = new GameLoop(
-					new List<GameScene>() {
-						new CutsceneScene("Test", "CenterTest"),
-						new CutsceneScene("Test", "DemoShortScene1"),
-						new CutsceneScene("Test", "DemoShortScene3"),
-						new SongScene("Metal", "story_by_brad_baker"),
-						new CutsceneScene("Test", "DemoShortScene2"),
-						new SongScene("Chiptune", "battle_mode"),
-					}
-				);
+				GameLoopManager.gameLoop = GameLoopManager.defaultGameLoop;
 			}
 
 			SceneManager.sceneLoaded += doSceneSetup;
@@ -38,5 +29,16 @@ namespace GameLoop {
 			nextScene = gameLoop.pop();
 			yield return SceneTransition.LoadScene(nextScene.getSceneType());
 		}
+
+		public static readonly GameLoopScenes defaultGameLoop = new GameLoopScenes(
+					new List<GameScene>() {
+						new CutsceneScene("Test", "CenterTest"),
+						new CutsceneScene("Test", "DemoShortScene1"),
+						new CutsceneScene("Test", "DemoShortScene3"),
+						new SongScene("Metal", "story_by_brad_baker"),
+						new CutsceneScene("Test", "DemoShortScene2"),
+						new SongScene("Chiptune", "battle_mode"),
+					}
+				);
 	}
 }

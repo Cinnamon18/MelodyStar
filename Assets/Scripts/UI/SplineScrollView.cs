@@ -109,6 +109,10 @@ public class SplineScrollView : Spliny
     }
 
     public void ScrollSingleElem(int dir) {
+		if(isScrolling) {
+			return;
+		}
+
         selectedElement -= dir;
 
         if (selectedElement < 0) {
