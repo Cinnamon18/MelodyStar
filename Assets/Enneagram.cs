@@ -15,7 +15,7 @@ public class Enneagram : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        CreateEnneagram();
+        CreateEnneagram("zoop");
     }
 
     // Update is called once per frame
@@ -23,11 +23,11 @@ public class Enneagram : MonoBehaviour
     {
     }
 
-    public void CreateEnneagram() {
+    public void CreateEnneagram(string seedString) {
 
         if (true || traitValues == null) {
             traitValues = new float[5];
-
+            Random.seed = seedString.GetHashCode();
             for (int i = 0; i < 5; i++) {
                 traitValues[i] = Random.Range(.3f, .7f);
                 //traitValues[i] = 1;
@@ -37,6 +37,7 @@ public class Enneagram : MonoBehaviour
         for (int i = 0; i < traitValues.Length; i++) {
             poly.VerticesDistances[i] = traitValues[i];
         }
+        poly.VerticesDistances[traitValues.Length] = poly.VerticesDistances[0];
 
         if (false) {
             vertices = new Vector3[numTraits + 1];
@@ -66,5 +67,6 @@ public class Enneagram : MonoBehaviour
             mesh.triangles = triangles;
             GetComponent<MeshFilter>().mesh = mesh;
         }
+        poly.zoop();
     }
 }

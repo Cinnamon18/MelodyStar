@@ -79,6 +79,10 @@ namespace UnityEngine.UI.Extensions
             }
             return vbo;
         }
+        public void zoop() {
+            SetVerticesDirty();
+
+        }
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear();

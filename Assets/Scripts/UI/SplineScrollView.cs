@@ -38,15 +38,19 @@ public class SplineScrollView : Spliny
     Transform lastSelectedElem;
 
     bool isScrolling = false;
+    
+    SongSelect ss;
 
     // Start is called before the first frame update
     void Start()
     {        
+        ss = FindObjectOfType<SongSelect>();
         CalculatePercentagesAlongSpline();
         totalNumElements = elementsHolder.childCount;
 
         selectedElem = elementsHolder.GetChild(selectedElement);
         SetHowSelected(1);
+        ss.HighlightSong(selectedElem.GetComponent<SongEntry>());
     }
 
     // Update is called once per frame
@@ -65,7 +69,7 @@ public class SplineScrollView : Spliny
         } else {
             v = 0;
         }
-        Debug.Log("Fitst elem pos: " + selectedElem.localPosition);
+        //Debug.Log("Fitst elem pos: " + selectedElem.localPosition);
         vertInputLastFrame = v;
     }
 
@@ -81,7 +85,7 @@ public class SplineScrollView : Spliny
             }
             float t = scrollAmount + elementSpacing * i;
             t = Mathf.Clamp(t, 0.0f, 1.0f);
-            element.GetComponentInChildren<TextMeshProUGUI>().text = "t: " + t;
+            //element.GetComponentInChildren<TextMeshProUGUI>().text = "t: " + t;
             //}
 
             if (false) {
@@ -129,10 +133,13 @@ public class SplineScrollView : Spliny
             lastSelectedElem = elementsHolder.GetChild(selectedElement + 1);
         }
 
-        if (lastSelectedElem != null)
-            lastSelectedElem.GetComponent<Canvas>().sortingOrder = 1;
+  //      if (lastSelectedElem != null)
+//            lastSelectedElem.GetComponent<Canvas>().sortingOrder = 1;
         selectedElem = elementsHolder.GetChild(selectedElement);
-        selectedElem.GetComponent<Canvas>().sortingOrder = 2;
+
+        ss.HighlightSong(selectedElem.GetComponent<SongEntry>());
+
+        //selectedElem.GetComponent<Canvas>().sortingOrder = 2;
 
         while (progress < 1) {
             progress += Time.deltaTime * speed;
