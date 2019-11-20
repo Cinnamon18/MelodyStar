@@ -11,7 +11,6 @@ namespace Songs.Gameplay {
 		const string basePath = "Assets/Resources/";
 
 		public GameObject lanePrefab;
-
 		public Song readSong(string band, string file) {
 			string path = "Songs/" + band + "/" + file + "/";
 			List<SongNote> notes = MidiParser.readMidi(basePath + path + "player.mid");

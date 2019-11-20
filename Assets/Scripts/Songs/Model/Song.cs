@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Songs.Model;
 using UnityEngine;
+using Songs.Gameplay;
 
 namespace Songs.Model {
 	public class Song {
@@ -23,6 +24,17 @@ namespace Songs.Model {
 			});
 			currentNotes.ForEach(note => { note.created = true;});
 			return currentNotes;
+		}
+		public bool songOver(float time)
+		{
+			foreach (SongNote currentNote in notes)
+			{
+				if (time < currentNote.endTime + 5)
+				{
+					return false;
+				}
+			}
+			return true;
 		}
 
 	}
