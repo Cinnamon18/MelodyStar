@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using Songs.Model;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Songs.Gameplay {
 	public class Lane : MonoBehaviour {
 
+		public Text notename;
 		public GameObject notePrefab, noteTargetPrefab, pressVFxPrefab;
 		public GameObject perfectEffect, goodEffect, missEffect;
 		[HideInInspector]
@@ -14,7 +16,9 @@ namespace Songs.Gameplay {
 		private Queue<LaneNote> notes = new Queue<LaneNote>();
 
 
+
 		void Start() {
+
 			width = gameObject.GetComponent<SpriteRenderer>().size.x;
 
 			noteTarget = Instantiate(noteTargetPrefab, this.transform.position + new Vector3(0, -9), noteTargetPrefab.transform.rotation);

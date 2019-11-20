@@ -14,15 +14,18 @@ namespace Songs.Model {
 		//Times are in whole seconds
 		public float startTime, endTime;
 		public bool created;
-
+		public float difficulty;
+		
 		public SongNote(NoteName letter, int key) :
-			this(letter, key, 0, 1) { }
+			this(letter, key, 0, 1/*,-1*/) { }
 
-		public SongNote(NoteName letter, int key, float startTime, float endTime) {
+		public SongNote(NoteName letter, int key, float startTime, float endTime/*,int difficulty*/) {
 			this.letter = letter;
 			this.key = key;
 			this.startTime = startTime;
-			this.endTime = endTime;
+			this.endTime = endTime; 
+			/*this.difficulty = difficulty;*/
+			
 		}
 
 		public int toIndex() {
