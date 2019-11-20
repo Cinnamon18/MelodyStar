@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7661204357361472358}
   - component: {fileID: 7661204357361472356}
   m_Layer: 5
-  m_Name: Idol1
+  m_Name: Ayane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,18 +90,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   expressionNamedSprites:
   - name: Neutral
-    prefab: {fileID: 21300000, guid: d50a76ab64a02a8438d4060ab9409666, type: 3}
-  - name: Precious
-    prefab: {fileID: 21300000, guid: 91797972ffda2194bb7648f9aace8b38, type: 3}
+    prefab: {fileID: 21300000, guid: d2f756dd4df0c304bb9a622b1a9aecb3, type: 3}
+  - name: Exasperated
+    prefab: {fileID: 21300000, guid: d2f756dd4df0c304bb9a622b1a9aecb3, type: 3}
   - name: Sad
-    prefab: {fileID: 21300000, guid: c6a68ddaf2d86114789589500886910b, type: 3}
+    prefab: {fileID: 21300000, guid: 5742c0dad1661974d8d97185ea143be5, type: 3}
   - name: Smile
-    prefab: {fileID: 21300000, guid: 2b5d490f56b4d85478e65365473da3bc, type: 3}
-  - name: Surprised
-    prefab: {fileID: 21300000, guid: f1a7569a4ecec6b42967dd8f2636dd36, type: 3}
-  - name: Angey
-    prefab: {fileID: 21300000, guid: 6311eaafd31d52645ad7471e3ab4151e, type: 3}
-  actorName: Idol1
+    prefab: {fileID: 21300000, guid: b86a4e78528c0614ba2d658f1a4441ef, type: 3}
+  - name: Angry
+    prefab: {fileID: 21300000, guid: dd2e18c3a7d59df4d96078d94a4c5cdb, type: 3}
+  actorName: Ayane
   image: {fileID: 7661204357361472358}
   position: 0
   isDark: 0
