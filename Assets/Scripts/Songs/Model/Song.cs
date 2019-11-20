@@ -7,14 +7,14 @@ namespace Songs.Model {
 	public class Song {
 		public List<SongNote> notes;
 		public AudioClip backgroundTrack, instrumentSample;
-		public float AudioLength;
-		public SongManager songManager;
-
-		public Song(List<SongNote> notes, AudioClip backgroundTrack, AudioClip instrumentSample) {
+		
+		public float difficulty;
+		public Song(List<SongNote> notes, AudioClip backgroundTrack, AudioClip instrumentSample ,float difficulty) {
 			this.notes = notes;
 			this.backgroundTrack = backgroundTrack;
 			this.instrumentSample = instrumentSample;
-			this.AudioLength = backgroundTrack.length;
+			this.difficulty = difficulty;
+
 		}
 
 		//TODO: Refactor this to be less than O(n)...
@@ -36,5 +36,6 @@ namespace Songs.Model {
 			}
 			return true;
 		}
+
 	}
 }

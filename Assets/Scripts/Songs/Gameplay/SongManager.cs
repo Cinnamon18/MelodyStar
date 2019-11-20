@@ -18,8 +18,18 @@ namespace Songs.Gameplay {
 		public List<Lane> lanes;
 		public float songStartTime;
 		public InputManager input;
+		[HideInInspector]
+		public int score = 0;
+		[HideInInspector]
+		public int numCorrect = 0;
+		[HideInInspector]
+		public int highestCombo = 0;
+		[HideInInspector]
+		public int combo = 0;
+
 		public string bandName;
 		public string songName;
+
 
 		void Start() {
 			if (!InputSettings.initalized)
@@ -51,57 +61,81 @@ namespace Songs.Gameplay {
 				int offsetFromC = note.toIndex() - new SongNote(NoteName.C, 4).toIndex();
 				int noteIndex = offsetFromC + InputSettings.middleC;
 				if (noteIndex > 0 && noteIndex < InputSettings.keys.Length - 1) {
-					lanes[noteIndex].createNote();
+					lanes[noteIndex].createNote(note);
 				} else {
 					Debug.Log("Note " + note + " outside of playable range");
 				}
 			}
 		}
 
-		[HideInInspector]
-		public int score = 0;
-		[HideInInspector]
-		public int numCorrect = 0;
-		[HideInInspector]
-		public int highestCombo = 0;
 		private void senseKeyPresses() {
 			//sense which k_eys are pressed
 			foreach (int laneIdx in input.keysIndiciesPressedButton) {
 				Lane lane = lanes[laneIdx];
 				lane.makePressVFx();
 				instrument.Play();
-				GameObject lowestNote = lane.getLowestNote();
-
-				int scoreMult = Multiplier(numCorrect);
+				LaneNote lowestNote = lane.getLowestNote();
 
 				if (lowestNote != null) {
-					float distance = (lowestNote.transform.position - lane.noteTarget.transform.position).magnitude;
-					if (distance < 0.5) {
-						lane.noteTapVFx(PressAccuracy.Perfect);
-						score += 100 * scoreMult;
-						numCorrect += 1;
-						numPerfect++;
-					} else if (distance < 1) {
-						lane.noteTapVFx(PressAccuracy.Good);
-						score += 75 * scoreMult;
-						numCorrect += 1;
-						numGood++;
-					}
-					else {
-						lane.noteTapVFx(PressAccuracy.Miss);
-						scoreMult = 0;
-						numCorrect = 0;
-						numMiss++;
-					}
-					if (numCorrect > highestCombo)
-					{
-						highestCombo = numCorrect;
+					if (lowestNote.isHoldNote) {
+						lowestNote.isBeingPressed = true;
+					} else {
+						numCorrect = calculateScore(numCorrect, lowestNote.bottomCircle, lane);
+						lane.destroyLowestNote();
 					}
 				}
+			}
 
-				Destroy(lowestNote);
+			foreach (int laneIdx in input.keysIndiciesReleasedButton) {
+				Lane lane = lanes[laneIdx];
+				lane.makePressVFx();
+				instrument.Play();
+				LaneNote lowestNote = lane.getLowestNote();
+
+				if (lowestNote != null) {
+					if (lowestNote.isHoldNote && lowestNote.isBeingPressed) {
+						numCorrect = calculateScore(numCorrect, lowestNote.topCircle, lane);
+						lane.destroyLowestNote();
+					} else {
+					}
+				}
 			}
 		}
+
+		//returns new num correct
+		private int calculateScore(int numCorrect, GameObject note, Lane lane) {
+			int scoreMult = Multiplier(numCorrect);
+			float distance = (note.transform.position - lane.noteTarget.transform.position).magnitude;
+			if (distance < 0.5) {
+				lane.noteTapVFx(PressAccuracy.Perfect);
+				score += 100 * scoreMult;
+				numPerfect++;
+				combo++;
+				if(combo > highestCombo) {
+					highestCombo = combo;
+				}
+				return numCorrect + 1;
+			} else if (distance < 1) {
+				lane.noteTapVFx(PressAccuracy.Good);
+				score += 75 * scoreMult;
+				numGood++;
+				combo++;
+				if(combo > highestCombo) {
+					highestCombo = combo;
+				}
+				return numCorrect + 1;
+			} else {
+				lane.noteTapVFx(PressAccuracy.Miss);
+				scoreMult = 0;
+				numMiss++;
+				if(combo > highestCombo) {
+					highestCombo = combo;
+				}
+				combo = 0;
+				return 0;
+			}
+		}
+
 		public static int Multiplier(int numCorrect) {
 			if (numCorrect > 200) {
 				return 8;
