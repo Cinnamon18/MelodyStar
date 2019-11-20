@@ -15,17 +15,15 @@ namespace Songs.Model {
 		public float startTime, endTime;
 		public bool created;
 		public float difficulty;
-		
-		public SongNote(NoteName letter, int key) :
-			this(letter, key, 0, 1/*,-1*/) { }
 
-		public SongNote(NoteName letter, int key, float startTime, float endTime/*,int difficulty*/) {
+		public SongNote(NoteName letter, int key) :
+			this(letter, key, 0, 1) { }
+
+		public SongNote(NoteName letter, int key, float startTime, float endTime) {
 			this.letter = letter;
 			this.key = key;
 			this.startTime = startTime;
-			this.endTime = endTime; 
-			/*this.difficulty = difficulty;*/
-			
+			this.endTime = endTime; 			
 		}
 
 		public int toIndex() {
