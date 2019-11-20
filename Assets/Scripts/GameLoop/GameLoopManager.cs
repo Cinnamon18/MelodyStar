@@ -26,7 +26,7 @@ namespace GameLoop {
 		}
 
 		//Do it this uggo way bc coroutines die on load. which makes me sad.
-		private GameScene nextScene;
+		public GameScene nextScene;
 		void doSceneSetup(Scene aScene, LoadSceneMode aMode) {
 			if (nextScene != null) {
 				nextScene.advance();
