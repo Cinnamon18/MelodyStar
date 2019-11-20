@@ -12,11 +12,10 @@ public class BounceUpAndDown : MonoBehaviour {
 	}
 
 	public IEnumerator Bounce() {
-		print("uwu");
 		yield return new WaitForSeconds(delay);
-		GetComponent<RectTransform>().position = GetComponent<RectTransform>().position + new Vector3(0, height, 0);
+		GetComponent<RectTransform>().transform.localPosition = GetComponent<RectTransform>().transform.localPosition + new Vector3(0, height, 0);
 		yield return new WaitForSeconds(delay);
-		GetComponent<RectTransform>().position = GetComponent<RectTransform>().position - new Vector3(0, height, 0);
+		GetComponent<RectTransform>().transform.localPosition = GetComponent<RectTransform>().transform.localPosition - new Vector3(0, height, 0);
 		StartCoroutine(Bounce());
 	}
 }
