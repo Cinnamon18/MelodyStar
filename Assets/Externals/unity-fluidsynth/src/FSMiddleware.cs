@@ -17,6 +17,9 @@ namespace FluidSynth {
             midiDriver  = IntPtr.Zero;
         int sfont = 0;
 
+        // Master audio gain (volume multiplier)
+        float audioGain;
+
         // MIDI event callback accessible variable wrapper
         GCHandle midiCallbackEnv;
         
@@ -36,15 +39,25 @@ namespace FluidSynth {
          * @param whether to autoconnect to an available MIDI device
          * @param Unity AudioDevice to output to instead of system audio
          */
-        public Middleware(int  audioSampleRate = 44100,
-                          int  audioPeriods    = 8,
-                          int  audioPeriodSize = 512,
-                          bool hotplugMIDI     = true,
+        public Middleware(float audioGain       = 0.2f,
+                          int   midiChannels    = 256,
+                          int   audioSampleRate = 44100,
+                          int   audioPeriods    = 8,
+                          int   audioPeriodSize = 512,
+                          bool  startMuted      = false,
+                          bool  hotplugMIDI     = true,
                           AudioSource unityAudioProvider = null) {
-            {   // Create settings
+            {   // Create settings   
                 settings = Wrapper.new_fluid_settings();
                 Util.Assert(settings != IntPtr.Zero,
                             "{0}: Failed to create settings.", pkg);
+
+                this.audioGain = audioGain;
+                if (startMuted)
+                    ((MiddlewareAPI) this).Mute();
+                else
+                    ((MiddlewareAPI) this).Unmute();
+                    
                 Wrapper.fluid_settings_setint
                     (settings, "synth.sample-rate", audioSampleRate);
                 Wrapper.fluid_settings_setint
@@ -54,13 +67,13 @@ namespace FluidSynth {
                 Wrapper.fluid_settings_setint
                     (settings, "midi.autoconnect", 0);
             }
-
+            
             {   // Create MIDI synthesizer
                 synth = Wrapper.new_fluid_synth(settings);
                 Util.Assert(synth != IntPtr.Zero,
                             "{0}: Failed to create synth.", pkg);
             }
-        
+            
             {   // Setup audio output
                 // Link synth to Unity AudioSource if provided
                 if (unityAudioProvider == null) {
@@ -69,7 +82,7 @@ namespace FluidSynth {
                         = Wrapper.new_fluid_audio_driver(settings, synth);
                     Util.Assert(audioDriver != IntPtr.Zero,
                                 "{0}: Failed to create driver.", pkg);
-                } else { 
+                } else {
                     unityAudioProvider.clip = AudioClip.Create
                         ("FluidSynth", 2, 2, audioSampleRate,
                          true, (float[] buf) => {
@@ -81,7 +94,7 @@ namespace FluidSynth {
                     unityAudioProvider.Play();
                 }
             }
-
+            
             // MIDI device input driver
             if (hotplugMIDI) {
                 if (((MiddlewareAPI) this).ConnectMIDIDevice())
@@ -90,7 +103,7 @@ namespace FluidSynth {
                 else
                     Debug.Log(String.Format("{0}: Could not find MIDI device!",
                                             pkg));
-                
+              
                 /*
                 var onDeviceConnect = () => {
                     if (!MiddlewareAPI.IsMIDIDeviceConnected())
@@ -113,7 +126,7 @@ namespace FluidSynth {
                 };
                 
                 //TODO set up listener for device hotplug.
-                */
+            */
             }
         }
 
@@ -121,20 +134,7 @@ namespace FluidSynth {
          * Destructor so we free allocated pointers.
          */
         ~Middleware() {
-            if (midiCallbackEnv.IsAllocated)
-                midiCallbackEnv.Free();
-
-            if (midiDriver != IntPtr.Zero)
-                Wrapper.delete_fluid_midi_driver(midiDriver);
-            
-            if (audioDriver != IntPtr.Zero)
-                Wrapper.delete_fluid_audio_driver(audioDriver);
-
-            if (synth != IntPtr.Zero)
-                Wrapper.delete_fluid_synth(synth);
-
-            if (settings != IntPtr.Zero)
-                Wrapper.delete_fluid_settings(settings);
+            ((MiddlewareAPI) this).Cleanup();
         }
 
         bool MiddlewareAPI.PlayNote(MIDINote midi) {
@@ -153,6 +153,20 @@ namespace FluidSynth {
             return Wrapper.fluid_synth_noteoff(synth, chn, key) != -1;
         }
 
+        void MiddlewareAPI.SetGain(float audioGain) {
+            this.audioGain = audioGain;
+        }
+
+        bool MiddlewareAPI.Mute() {
+            return Wrapper.fluid_settings_setnum
+                (settings, "synth.gain", 0f) != -1;
+        }
+
+        bool MiddlewareAPI.Unmute() {
+            return Wrapper.fluid_settings_setnum
+                (settings, "synth.gain", audioGain) != -1;
+        }
+        
         bool MiddlewareAPI.SetChannelInstrument
             (int chn, SoundFont sfont, int bnk, int preset) {
             return Wrapper.fluid_synth_program_select
@@ -208,6 +222,31 @@ namespace FluidSynth {
 
         bool MiddlewareAPI.IsMIDIDeviceConnected() {
             return midiDriver != IntPtr.Zero;
+        }
+
+        void MiddlewareAPI.Cleanup() {
+            if (midiCallbackEnv.IsAllocated)
+                midiCallbackEnv.Free();
+            
+            if (midiDriver != IntPtr.Zero) {
+                Wrapper.delete_fluid_midi_driver(midiDriver);
+                midiDriver = IntPtr.Zero;
+            }
+            
+            if (audioDriver != IntPtr.Zero) {
+                Wrapper.delete_fluid_audio_driver(audioDriver);
+                audioDriver = IntPtr.Zero;
+            }
+
+            if (synth != IntPtr.Zero) {
+                Wrapper.delete_fluid_synth(synth);
+                synth = IntPtr.Zero;
+            }
+
+            if (settings != IntPtr.Zero) {
+                Wrapper.delete_fluid_settings(settings);
+                settings = IntPtr.Zero;
+            }
         }
 
         /*

@@ -19,8 +19,10 @@ public class MIDIExample : MonoBehaviour {
         0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
     };
     
-    void OnEnable() {
+    void Awake() {
         midiSys = new Middleware();
+
+        midiSys.SetGain(0.2f);
         
         var sfont = midiSys.LoadSoundFont(streamingSoundFontPath);
 
@@ -37,6 +39,19 @@ public class MIDIExample : MonoBehaviour {
         midiSys.SetOnMIDIDeviceRelease(onMIDI, this);
     }
 
+    void OnEnable() {
+        midiSys.Unmute();
+    }
+
+    void OnDisable() {
+        midiSys.Mute();
+    }
+
+    void OnDestroy() {
+        midiSys.Cleanup();
+        midiSys = null;
+    }
+    
     void Update() {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
             if (chn < max_chn - 1) {
