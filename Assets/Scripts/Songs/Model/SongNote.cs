@@ -13,7 +13,7 @@ namespace Songs.Model {
 		public int key;
 		//Times are in whole seconds
 		public float startTime, endTime;
-		public bool created, pressed;
+		public bool created;
 
 		public SongNote(NoteName letter, int key) :
 			this(letter, key, 0, 1) { }

@@ -18,9 +18,14 @@ namespace CustomInput {
 		public List<int> keysIndiciesPressedButton = new List<int>();
 		private List<int> keysIndiciesPressedLastFrame = new List<int>();
 
+		[HideInInspector]
+		public List<int> keysIndiciesReleasedButton = new List<int>();
+
+
 		void Update() {
 			keysIndiciesPressed.Clear();
 			keysIndiciesPressedButton.Clear();
+			keysIndiciesReleasedButton.Clear();
 			for (int i = 0; i < InputSettings.keys.Length; i++) {
 				if (InputSettings.inputMode == InputMode.Keyboard) {
 					if (Input.GetKey((KeyCode)(InputSettings.keys[i]))) {
@@ -38,6 +43,10 @@ namespace CustomInput {
 							keysIndiciesPressedButton.Add(i);
 						}
 					}
+				}
+
+				if(keysIndiciesPressedLastFrame.Contains(i) && ! keysIndiciesPressed.Contains(i)) {
+					keysIndiciesReleasedButton.Add(i);
 				}
 			}
 			keysIndiciesPressedLastFrame = new List<int>(keysIndiciesPressed);

@@ -21,5 +21,6 @@ namespace Songs.Model {
 			currentNotes.ForEach(note => { note.created = true;});
 			return currentNotes;
 		}
+
 	}
 }
