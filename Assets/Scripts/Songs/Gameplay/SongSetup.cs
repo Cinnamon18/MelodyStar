@@ -15,7 +15,8 @@ namespace Songs.Gameplay {
 		public GameObject lanePrefab;
 		public Song readSong(string band, string file) {
 			string path = "Songs/" + band + "/" + file + "/";
-			List<SongNote> notes = MidiParser.readMidi(basePath + path + "player.mid");
+			List<SongNote> notes = MidiParser.readMidi(basePath + "/" + path + "player.mid");
+			print(basePath + "/" + path + "player.mid");
 			AudioClip songBackground = Resources.Load<AudioClip>(path + "backing");
 			AudioClip hitNoise = Resources.Load<AudioClip>(path + "instrument");
 			return new Song(notes, songBackground, hitNoise, getDifficulty(notes));

@@ -968,11 +968,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actors:
-  - {fileID: 4388319995047766993, guid: 5da64df709318f0458625ff2979a48bd, type: 3}
-  - {fileID: 7661204357361472353, guid: c7e3ab2c4e74a6d4eb09402e46a1c8d7, type: 3}
+  - {fileID: 7661204357361472353, guid: 3316b3123624afc4a8b488e149bded77, type: 3}
   - {fileID: 6423410586430329073, guid: b3e4f4e5695c7484eb8c636127552a44, type: 3}
-  - {fileID: 6423410586430329073, guid: 81646b175add1aa4ea5f493eb7c1e746, type: 3}
+  - {fileID: 7661204357361472353, guid: 8d663a120abb6094799469c68b726110, type: 3}
+  - {fileID: 7661204357361472353, guid: 6a585a7edac9b26488f44273a35b6912, type: 3}
+  - {fileID: 6423410586430329073, guid: 43ba89f85d6ead045b754ebd00f1d460, type: 3}
+  - {fileID: 7661204357361472353, guid: b13b4bd75ea9f3a468df5af6dc6bd551, type: 3}
+  - {fileID: 7661204357361472353, guid: bc56353451979bf44a4bff4676859b0d, type: 3}
+  - {fileID: 7661204357361472353, guid: 4f3e1f043c31666438c61a90d32c0cbb, type: 3}
+  - {fileID: 7661204357361472353, guid: 4e52371831e4a4e43a5dbae7e4a821fd, type: 3}
+  - {fileID: 7661204357361472353, guid: c7e3ab2c4e74a6d4eb09402e46a1c8d7, type: 3}
+  - {fileID: 4388319995047766993, guid: 5da64df709318f0458625ff2979a48bd, type: 3}
   - {fileID: 7661204357361472353, guid: 3fabb6916889a844c889cba7f9339c1a, type: 3}
+  - {fileID: 7661204357361472353, guid: f157a72fe7fbc7d44bad80d7f742ac60, type: 3}
+  - {fileID: 7661204357361472353, guid: c50807ab6463bce4ca5fb641782bba97, type: 3}
+  - {fileID: 7661204357361472353, guid: 76efd31e04bb0d242ab713044a453c69, type: 3}
+  - {fileID: 6423410586430329073, guid: 81646b175add1aa4ea5f493eb7c1e746, type: 3}
+  - {fileID: 7661204357361472353, guid: 784ee90abf874fd46bf9bbecdc5fb56a, type: 3}
+  - {fileID: 7661204357361472353, guid: 21d008344ef3d9f43aa2323c331cfde0, type: 3}
+  - {fileID: 7661204357361472353, guid: 361488f8897e262468546177dea2329a, type: 3}
   backgroundNamedPrefabs:
   - name: StreetNight
     prefab: {fileID: 21300000, guid: b2a222b26a525a049b482fae2127f7aa, type: 3}

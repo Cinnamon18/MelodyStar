@@ -1,0 +1,18 @@
+Scene: Bar
+
+Enter left: Ayane
+
+Enter center: Sumi
+
+Enter right: Momo
+
+// Takes place at the bar, momo is juiced abt performing, ayane thinks it’s kinda low class, Sumi thinks it’s fine.
+
+Momo
+Our first performance in this city! 
+
+Ayane
+It’s ok I guess!
+
+Sumi
+I’m excited too!
