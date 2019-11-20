@@ -15,6 +15,7 @@ public class SplineScrollView : Spliny
     public Transform elementsHolder;
     public float scrollAmount;
     public float elementSpacing = 100;
+    public float elementSpacingScreenSpace = 1;
 
     public float scrollSpeed = 1;
 
@@ -28,6 +29,10 @@ public class SplineScrollView : Spliny
     public float singleElemScrollTime = .2f;
     public ElementSelectionMethod selectionMethod;
     public float selectedElemScale = 2f;
+    public float borderAroundSelectedItem = 5;
+
+    public AnimationCurve scrollCurve;
+    public float curveWidth = 100;
 
     Transform selectedElem;
     Transform lastSelectedElem;
@@ -39,6 +44,9 @@ public class SplineScrollView : Spliny
     {        
         CalculatePercentagesAlongSpline();
         totalNumElements = elementsHolder.childCount;
+
+        selectedElem = elementsHolder.GetChild(selectedElement);
+        SetHowSelected(1);
     }
 
     // Update is called once per frame
@@ -57,21 +65,36 @@ public class SplineScrollView : Spliny
         } else {
             v = 0;
         }
+        Debug.Log("Fitst elem pos: " + selectedElem.localPosition);
         vertInputLastFrame = v;
     }
 
     void UpdatePositionsOfElements() {
         int i = 0;
         float elemSpacingScaled = elementSpacing / 100.0f;
+        elemSpacingScaled = Screen.height / 1000f * elementSpacingScreenSpace;
         //scrollAmount = Mathf.Clamp(scrollAmount, 0, 1);
+        float scrollAmountOffset = scrollAmount * Screen.height * elementSpacingScreenSpace;
         foreach (Transform element in elementsHolder) {
-            
-            float t = scrollAmount + elemSpacingScaled * i;
+            if (element == selectedElem) {
+                i += 1;
+            }
+            float t = scrollAmount + elementSpacing * i;
             t = Mathf.Clamp(t, 0.0f, 1.0f);
-            //element.GetComponentInChildren<TextMeshProUGUI>().text = "t: " + t;
+            element.GetComponentInChildren<TextMeshProUGUI>().text = "t: " + t;
             //}
+
+            if (false) {
             element.transform.position = Evaluate(t);
+            } else {
+                float yPos = Mathf.Lerp(splineNodes[0].transform.position.y, splineNodes[splineNodes.Length - 1].transform.position.y, t);
+                float xPos = splineNodes[0].transform.position.x + scrollCurve.Evaluate(t) * curveWidth * Screen.width;
+                element.transform.position = new Vector3(xPos, yPos, 0);
+            }
             i++;
+            if (element == selectedElem) {
+                i += 1;
+            }
         }
     }
     
@@ -98,6 +121,7 @@ public class SplineScrollView : Spliny
         float progress = 0;
         float speed = 1 / singleElemScrollTime;
         float startScrollAmount = scrollAmount;
+        float targetScrollAmount = scrollAmount + dir * elementSpacing;
 
         if (dir < 0) {
             lastSelectedElem = elementsHolder.GetChild(selectedElement - 1);
@@ -106,9 +130,9 @@ public class SplineScrollView : Spliny
         }
 
         if (lastSelectedElem != null)
-            lastSelectedElem.GetComponent<Canvas>().sortingOrder = 0;
+            lastSelectedElem.GetComponent<Canvas>().sortingOrder = 1;
         selectedElem = elementsHolder.GetChild(selectedElement);
-        selectedElem.GetComponent<Canvas>().sortingOrder = 1;
+        selectedElem.GetComponent<Canvas>().sortingOrder = 2;
 
         while (progress < 1) {
             progress += Time.deltaTime * speed;
@@ -117,9 +141,10 @@ public class SplineScrollView : Spliny
 
             float progressFromCurve = scrollOneElementCurve.Evaluate(progress);
 
-            scrollAmount = startScrollAmount + elementSpacing / 100.0f * progressFromCurve * dir;
+            //scrollAmount = startScrollAmount + elementSpacing / 100.0f * progressFromCurve * dir;
+            scrollAmount = Mathf.Lerp(startScrollAmount, targetScrollAmount, progress);
 
-            SetHowSelected(progressFromCurve, dir);
+            SetHowSelected(progressFromCurve);
 
             UpdatePositionsOfElements();
         }
@@ -141,14 +166,16 @@ public class SplineScrollView : Spliny
         isScrolling = false;
     }
 
-    void SetHowSelected(float amount, int dir) {
+    void SetHowSelected(float amount) {
         switch (selectionMethod) {
             case (ElementSelectionMethod.RESIZE):
             selectedElem.localScale 
                 = Vector3.Lerp(new Vector3(1,1,1), new Vector3(selectedElemScale, selectedElemScale, selectedElemScale), amount);
 
-            lastSelectedElem.localScale 
-            = Vector3.Lerp(new Vector3(1,1,1), new Vector3(selectedElemScale, selectedElemScale, selectedElemScale), 1 - amount);
+            if (lastSelectedElem) {
+                lastSelectedElem.localScale 
+                = Vector3.Lerp(new Vector3(1,1,1), new Vector3(selectedElemScale, selectedElemScale, selectedElemScale), 1 - amount);
+            }
             break;
         }
     }
