@@ -3,29 +3,37 @@ using CustomInput;
 using Songs.Model;
 using UnityEngine;
 using Melanchall.DryWetMidi.MusicTheory;
+using Songs.Gameplay;
 
 namespace Songs.Gameplay {
 	public class SongManager : MonoBehaviour {
 
-		private Song song;
+		public Song song;
 		public SongSetup songSetup;
 		public AudioSource backgroundMusic;
 		public AudioSource instrument;
-
-		private List<Lane> lanes;
-		private float songStartTime;
+		public int numPerfect;
+		public int numGood;
+		public int numMiss;
+		public List<Lane> lanes;
+		public float songStartTime;
 		public InputManager input;
 		[HideInInspector]
 		public int score = 0;
 		[HideInInspector]
 		public int numCorrect = 0;
+		[HideInInspector]
+		public int highestCombo = 0;
+		[HideInInspector]
+		public int combo = 0;
 
-		public string bandName;
-		public string songName;
+		public string bandName = "Test";
+		public string songName = "HotCrossBunsLow";
 
 
 		void Start() {
-			if (!InputSettings.initalized) {
+			if (!InputSettings.initalized)
+			{
 				InputSettings.setToDefault();
 			}
 			song = songSetup.readSong(bandName, songName);
@@ -60,9 +68,8 @@ namespace Songs.Gameplay {
 			}
 		}
 
-
 		private void senseKeyPresses() {
-			//sense which keys are pressed
+			//sense which k_eys are pressed
 			foreach (int laneIdx in input.keysIndiciesPressedButton) {
 				Lane lane = lanes[laneIdx];
 				lane.makePressVFx();
@@ -102,14 +109,29 @@ namespace Songs.Gameplay {
 			if (distance < 0.5) {
 				lane.noteTapVFx(PressAccuracy.Perfect);
 				score += 100 * scoreMult;
+				numPerfect++;
+				combo++;
+				if(combo > highestCombo) {
+					highestCombo = combo;
+				}
 				return numCorrect + 1;
 			} else if (distance < 1) {
 				lane.noteTapVFx(PressAccuracy.Good);
 				score += 75 * scoreMult;
+				numGood++;
+				combo++;
+				if(combo > highestCombo) {
+					highestCombo = combo;
+				}
 				return numCorrect + 1;
 			} else {
 				lane.noteTapVFx(PressAccuracy.Miss);
 				scoreMult = 0;
+				numMiss++;
+				if(combo > highestCombo) {
+					highestCombo = combo;
+				}
+				combo = 0;
 				return 0;
 			}
 		}
